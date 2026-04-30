@@ -1,0 +1,156 @@
+*::before, ::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root{
+  /*
+  CORES
+  */
+  --color-ebano:   #2C1F14; /* primária — fundos escuros, headers      */
+  --color-grafite: #3D3530; /* texto corrido, elementos neutros        */
+  --color-terra:   #8B6E52; /* acento principal, links, destaques      */
+  --color-linho:   #C9A98A; /* dourado — elementos sobre fundo escuro  */
+  --color-cru:     #F4EDE4; /* fundo claro, off-white elegante         */
+
+  /*
+  CORES VARIANTES
+  */
+
+  --color-terra-muted:  #A08870; /* terra rebaixado — subtextos, placeholders */
+  --color-cru-border:   #E8DDD4; /* borda sobre fundo claro                   */
+  --color-ebano-surface:#3D3530; /* superfície elevada sobre fundo escuro     */
+
+  /*
+  SEMÂNTICA DE CORES
+  */
+  
+  --color-bg-light:  var(--color-cru);
+  --color-bg-dark:   var(--color-ebano);
+  --color-text-dark: var(--color-ebano);
+  --color-text-body: var(--color-grafite);
+  --color-text-muted:var(--color-terra-muted);
+  --color-accent:    var(--color-terra);
+  --color-accent-alt:var(--color-linho);
+  --color-border:    var(--color-cru-border);
+
+  /*
+  TIPOGRAFIA - FONTES
+  */
+
+  --ff-sans:"Poppins", system-ui, sans-serif;
+
+   /*
+  TIPOGRAFIA - PESOS
+  */
+  
+  --fw-light: 300;
+  --fw-base: 400;
+  --fw-bold: 500;
+
+   /*
+  TIPOGRAFIA - TAMANHOS
+  */
+
+  --fs-xs: .625rem;
+  --fs-sm: .875rem;
+  --fs-base: 1rem;
+  --fs-md: 1.125rem;
+  --fs-lg: 1.375rem;
+  --fs-xl: 1.625rem;
+  --fs-2xl: 2.25rem;
+  --fs-3xl: 2.625rem;
+
+    --py-sm: .875rem;
+    --py-base: 1rem;
+    --py-lg: 1.5rem;
+    --py-xl: 3rem;
+
+    --px-lg: 1.5rem;
+}
+
+
+
+
+html{
+  font-family: var(--ff-sans);
+  font-weight: var(--fw-base);
+  font-size: var(--fs-base);
+  line-height: 1.6;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  background-color: var(--color-bg-light);
+}
+
+h1,h2,h3{
+  line-height: 1.2;
+  color: var(--color-text-dark);
+  font-weight: var(--fw-bold);
+  letter-spacing: -0.04em;
+}
+
+h1{
+  font-size: var(--fs-3xl);
+}
+
+h2{
+  font-size: var(--fs-2xl);
+}
+
+h3{
+  font-size: var(--fs-xl);
+}
+
+h4{
+  font-size: var(--fs-lg);
+}
+
+h5{
+  font-size: var(--fs-md);
+}
+
+h6{
+  font-size: var(--fs-sm);
+}
+
+a {
+    text-decoration: none;
+    color: var(--second-text-color);
+    font-weight: var(--fw-bold);
+    font-size: var(--fs-sm);
+}
+
+a:hover {
+    color: var(--primary-color);
+}
+
+img {
+    max-width: 100%;
+    display: inline-block;
+}
+
+ul, ol {
+    list-style: none;
+}
+
+@media (max-width: 1280px){
+  :root{
+    --fs-xs: .625rem;
+    --fs-sm: 1rem;
+    --fs-base: 1.5rem;
+    --fs-md: 1.75rem;
+    --fs-lg: 2rem;
+    --fs-xl: 2.5rem;
+    --fs-2xl: 3rem;
+    --fs-3xl: 4rem;
+  }
+}
