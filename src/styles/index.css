@@ -25,6 +25,20 @@
   font-style: italic;
 }
 
+.jost {
+  font-family: "Jost", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.cormorant-garamond {
+  font-family: "Cormorant Garamond", serif;
+  font-optical-sizing: auto;
+  font-weight: var(--fw-light);
+  font-style: italic;
+}
+
 :root {
   /*
   CORES
@@ -62,11 +76,12 @@
   */
 
   --ff-serif: "DM Serif Display", sans-serif;
+  --ff-jost: "Jost", sans-serif;
+  --ff-cormorant: "Cormorant Garamond", sans-serif;
 
   /*
   TIPOGRAFIA - PESOS
   */
-
   --fw-light: 300;
   --fw-base: 400;
   --fw-bold: 500;
@@ -93,13 +108,17 @@
 }
 
 html {
-  font-family: var(--ff-sans);
+  font-family: var(--ff-jost);
   font-weight: var(--fw-base);
   font-size: var(--fs-base);
   line-height: 1.6;
   overflow-x: hidden;
   scroll-behavior: smooth;
   background-color: var(--color-bg-light);
+}
+
+nav {
+  margin: 0 2rem 0 2rem;
 }
 
 h1,
@@ -138,8 +157,8 @@ h6 {
 a {
   text-decoration: none;
   color: var(--color-grafite);
-  font-weight: var(--fw-bold);
-  font-size: var(--fs-xl);
+  font-weight: var(--fw-base);
+  font-size: var(--fs-md);
 }
 
 a:hover {

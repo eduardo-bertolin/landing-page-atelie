@@ -3,7 +3,7 @@
   background: var(--color-bg-dark);
   color: var(--color-text-light);
   font-weight: var(--fw-bold);
-  font-size: var(--fs-lg);
+  font-size: var(--fs-base);
   padding-block: 0.825rem;
   padding-inline: 1.5rem;
   border-radius: 0.4rem;
@@ -22,7 +22,7 @@
   background: transparent;
   color: var(--primary-color);
   font-weight: var(--fw-bold);
-  font-size: var(--fs-sm);
+  font-size: var(--fs-base);
   padding-block: 0.825rem;
   padding-inline: 1.5rem;
   border-radius: 0.4rem;

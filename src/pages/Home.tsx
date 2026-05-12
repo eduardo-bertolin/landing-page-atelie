@@ -10,25 +10,22 @@ export default function Home() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   return (
     <>
-      <header className="container py-sm">
+      <header className=" py-sm">
         <nav className="flex items-center justify-between">
-          <img src={Logo} alt="Logo Ateli Tati" width={220} height={80} />
+          <img src={Logo} alt="Logo Atelie Tati" width={220} height={80} />
           <div className="desktop-only">
             <ul className="flex gap-1">
               <li>
-                <a href="#">Home</a>
+                <a href="#solucoes">Soluções</a>
               </li>
               <li>
-                <a href="#solution">Soluções</a>
+                <a href="#depoimentos">Depoimentos</a>
               </li>
               <li>
-                <a href="#testimonials">Depoimentos</a>
+                <a href="#precos">Preços</a>
               </li>
               <li>
-                <a href="#pricing">Preços</a>
-              </li>
-              <li>
-                <a href="#contact">Contato</a>
+                <a href="#contato">Contato</a>
               </li>
             </ul>
           </div>
@@ -85,6 +82,14 @@ export default function Home() {
           </div>
         </nav>
       </header>
+      <main className="flex items-center">
+        <div className="container">
+          <h1 className="font-serif">Feito à mão, com propósito.</h1>
+          <h2 className="font-cormorant">
+            Costura artesanal para quem acredita em peças únicas
+          </h2>
+        </div>
+      </main>
     </>
   );
 }
