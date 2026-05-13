@@ -5,6 +5,7 @@ import { useState } from "react";
 import Button from "../components/Button";
 import MenuIcon from "../assets/menu.svg";
 import CloseIcon from "../assets/close.svg";
+import Costura from "../assets/images/costura.png";
 
 export default function Home() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -26,13 +27,13 @@ export default function Home() {
           <div className="desktop-only">
             <ul className="flex gap-1">
               <li>
-                <a href="#solucoes">Soluções</a>
+                <a href="#solucoes">Sobre</a>
               </li>
               <li>
-                <a href="#depoimentos">Depoimentos</a>
+                <a href="#depoimentos">Serviços</a>
               </li>
               <li>
-                <a href="#precos">Preços</a>
+                <a href="#precos">Portfólio</a>
               </li>
               <li>
                 <a href="#contato">Contato</a>
@@ -56,16 +57,21 @@ export default function Home() {
                       <a href="#">Home</a>
                     </li>
                     <li>
-                      <a href="#solution">Soluções</a>
+                      <a href="#solution">Sobre</a>
                     </li>
                     <li>
-                      <a href="#testimonials">Depoimentos</a>
+                      <a href="#testimonials">Serviços</a>
                     </li>
                     <li>
-                      <a href="#pricing">Preços</a>
+                      <a href="#pricing">Portfólio</a>
                     </li>
                     <li>
                       <a href="#contact">Contato</a>
+                    </li>
+                    <li>
+                      <a className="reverse-color" href="#">
+                        Login
+                      </a>
                     </li>
                   </ul>
                   <span
@@ -94,28 +100,38 @@ export default function Home() {
       </header>
 
       <main className="flex items-center">
-        <div className="flex background" style={backgroundStyle}>
-          <div className="desktop-only container">
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              {/* Span apenas para o visual (traço) */}
-              <span className="line" />
+        <section id="hero">
+          <div className="flex background" style={backgroundStyle}>
+            <div className="container flex hero-row">
+              <div className="textos desktop-only container">
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "1rem" }}
+                >
+                  {/* Span apenas para o visual (traço) */}
+                  <span className="line" />
 
-              <h2 className="font-jost color-dourado uppercase fs-md ls-md">
-                Ateliê de Patchwork
-              </h2>
+                  <span className="font-jost color-dourado uppercase fs-md ls-md">
+                    Ateliê de Patchwork
+                  </span>
+                </div>
+                <h1 className="font-serif color-cru fs-6xl">
+                  Feito à mão, <br />
+                  com{" "}
+                  <span className="font-cormorant color-dourado fs-6xl">
+                    propósito.
+                  </span>
+                </h1>
+                <p className="font-cormorant color-cru-translucent fs-2xl mw-regular">
+                  Costura artesanal para quem acredita em peças únicas.
+                </p>
+              </div>
+
+              <div className="hero-image desktop-only">
+                <img src={Costura} alt="" />
+              </div>
             </div>
-            <h1 className="font-serif color-cru">
-              Feito à mão, <br />
-              com{" "}
-              <span className="font-cormorant color-dourado fs-3xl">
-                propósito.
-              </span>
-            </h1>
-            <h2 className="font-cormorant color-cru-translucent">
-              Costura artesanal para quem acredita em peças únicas.
-            </h2>
           </div>
-        </div>
+        </section>
       </main>
     </>
   );

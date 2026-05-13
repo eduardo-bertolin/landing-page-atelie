@@ -33,6 +33,13 @@
   display: flex;
 }
 
+/* Centra verticalmente o conteúdo dentro do hero (pai do .textos) */
+#hero .background {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
 .grid {
   display: grid;
 }
@@ -52,12 +59,12 @@
 
 .container {
   --max-width: 680px;
-  width: min(var(--max-width), 100% - var(--px-lg) * 2);
+  width: min(var(--max-width), 100% - var(--px-xl) * 2);
   margin-inline: auto;
 }
 
 .background {
-  width: 100vw;
+  width: (100vw-);
 }
 
 /* FONTES */
@@ -82,8 +89,20 @@
   font-size: var(--fs-md);
 }
 
+.fs-2xl {
+  font-size: var(--fs-2xl);
+}
+
 .fs-3xl {
   font-size: var(--fs-3xl);
+}
+
+.fs-6xl {
+  font-size: var(--fs-6xl);
+}
+
+.mw-regular {
+  max-width: 450px;
 }
 
 /* ESTILOS */
@@ -113,6 +132,34 @@
 
 .color-dourado {
   color: var(--color-dourado);
+}
+
+.textos {
+  display: flex;
+  align-items: center;
+}
+
+.hero-row {
+  gap: 2rem;
+  align-items: center;
+}
+
+.hero-image {
+  /* Largura baseada no espaço do flex ao lado do .textos */
+  flex: 1;
+  min-width: 576px;
+
+  height: 700px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 @media (width >= 1280px) {

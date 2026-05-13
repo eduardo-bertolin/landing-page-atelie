@@ -6,15 +6,13 @@
   font-size: var(--fs-base);
   padding-block: 0.825rem;
   padding-inline: 1.5rem;
-  border-radius: 0.4rem;
+  border-radius: 0.1rem;
   cursor: pointer;
   border: solid transparent 0.15rem;
 }
 
 .btn-primary:hover {
-  background: transparent;
-  color: var(--primary-color);
-  border-color: var(--bg-dark);
+  background: var(--color-terra);
 }
 
 .btn-secondary {
@@ -25,7 +23,7 @@
   font-size: var(--fs-base);
   padding-block: 0.825rem;
   padding-inline: 1.5rem;
-  border-radius: 0.4rem;
+  border-radius: 0.1rem;
   cursor: pointer;
   border: solid var(--primary-color) 0.15rem;
 }
