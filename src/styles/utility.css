@@ -55,6 +55,11 @@
   width: min(var(--max-width), 100% - var(--px-lg) * 2);
   margin-inline: auto;
 }
+
+.background {
+  width: 100vw;
+}
+
 /* FONTES */
 .font-serif {
   font-family: var(--ff-serif);
@@ -62,8 +67,52 @@
 .font-jost {
   font-family: var(--ff-jost);
 }
+.font-cormorant {
+  font-family: var(--ff-cormorant);
+  font-style: italic;
+}
+
+/* TAMANHOS */
+
+.fs-base {
+  font-size: var(--fs-base);
+}
+
+.fs-md {
+  font-size: var(--fs-md);
+}
+
+.fs-3xl {
+  font-size: var(--fs-3xl);
+}
+
+/* ESTILOS */
+.uppercase {
+  text-transform: uppercase;
+}
+
+/* ESPAÇAMENTO */
+
+.ls-md {
+  letter-spacing: 0.25rem;
+}
+
+/* PESOS */
 .fw-base {
   font-weight: var(--fw-base);
+}
+
+/* CORES */
+.color-cru {
+  color: var(--color-cru);
+}
+
+.color-cru-translucent {
+  color: var(--color-cru-translucent);
+}
+
+.color-dourado {
+  color: var(--color-dourado);
 }
 
 @media (width >= 1280px) {

@@ -56,6 +56,7 @@
   --color-terra-muted: #a08870; /* terra rebaixado — subtextos, placeholders */
   --color-cru-border: #e8ddd4; /* borda sobre fundo claro                   */
   --color-ebano-surface: #3d3530; /* superfície elevada sobre fundo escuro     */
+  --color-cru-translucent: #ded8e0;
 
   /*
   SEMÂNTICA DE CORES
@@ -114,18 +115,19 @@ html {
   line-height: 1.6;
   overflow-x: hidden;
   scroll-behavior: smooth;
-  background-color: var(--color-bg-light);
+  background-color: var(--color-cru);
 }
 
 nav {
   margin: 0 2rem 0 2rem;
+  background-color: var(--color-cru);
 }
 
 h1,
 h2,
 h3 {
   line-height: 1.2;
-  color: var(--color-text-dark);
+  color: var(--color-);
   font-weight: var(--fw-bold);
   letter-spacing: -0.04em;
 }
@@ -136,6 +138,7 @@ h1 {
 
 h2 {
   font-size: var(--fs-2xl);
+  max-width: 450px;
 }
 
 h3 {
@@ -164,6 +167,14 @@ a {
 a:hover {
   color: var(--color-terra);
   cursor: pointer;
+}
+
+.line {
+  display: block;
+  width: 60px;
+  height: 2px; /* Ultra-fine border conforme o Design System */
+  background-color: #c5a880; /* Cor aproximada do tom 'Terra' ou 'Linho' */
+  opacity: 0.6;
 }
 
 img {

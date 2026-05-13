@@ -8,6 +8,16 @@ import CloseIcon from "../assets/close.svg";
 
 export default function Home() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const backgroundStyle = {
+    backgroundColor: "var(--color-ebano)",
+    backgroundImage: `repeating-linear-gradient(
+    45deg,
+    #3b2a1c,
+    transparent 1px,
+    transparent 12px
+  )`,
+    minHeight: "100vh",
+  };
   return (
     <>
       <header className=" py-sm">
@@ -82,12 +92,29 @@ export default function Home() {
           </div>
         </nav>
       </header>
+
       <main className="flex items-center">
-        <div className="container">
-          <h1 className="font-serif">Feito à mão, com propósito.</h1>
-          <h2 className="font-cormorant">
-            Costura artesanal para quem acredita em peças únicas
-          </h2>
+        <div className="flex background" style={backgroundStyle}>
+          <div className="desktop-only container">
+            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+              {/* Span apenas para o visual (traço) */}
+              <span className="line" />
+
+              <h2 className="font-jost color-dourado uppercase fs-md ls-md">
+                Ateliê de Patchwork
+              </h2>
+            </div>
+            <h1 className="font-serif color-cru">
+              Feito à mão, <br />
+              com{" "}
+              <span className="font-cormorant color-dourado fs-3xl">
+                propósito.
+              </span>
+            </h1>
+            <h2 className="font-cormorant color-cru-translucent">
+              Costura artesanal para quem acredita em peças únicas.
+            </h2>
+          </div>
         </div>
       </main>
     </>
