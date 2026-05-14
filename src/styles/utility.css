@@ -1,3 +1,7 @@
+.py-sm {
+  padding-block: var(--py-sm);
+}
+
 .py-base {
   padding-block: var(--py-base);
 }
@@ -22,9 +26,11 @@
   display: grid;
   gap: 1rem;
 }
+
 .items-center {
   align-items: center;
 }
+
 .justify-between {
   justify-content: space-between;
 }
@@ -33,12 +39,7 @@
   display: flex;
 }
 
-/* Centra verticalmente o conteúdo dentro do hero (pai do .textos) */
-#hero .background {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-}
+
 
 .grid {
   display: grid;
@@ -71,9 +72,11 @@
 .font-serif {
   font-family: var(--ff-serif);
 }
+
 .font-jost {
   font-family: var(--ff-jost);
 }
+
 .font-cormorant {
   font-family: var(--ff-cormorant);
   font-style: italic;
@@ -89,6 +92,10 @@
   font-size: var(--fs-md);
 }
 
+.fs-xl {
+  font-size: var(--fs-xl);
+}
+
 .fs-2xl {
   font-size: var(--fs-2xl);
 }
@@ -102,7 +109,7 @@
 }
 
 .mw-regular {
-  max-width: 450px;
+  max-width: 350px;
 }
 
 /* ESTILOS */
@@ -136,7 +143,9 @@
 
 .textos {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1;
 }
 
 .hero-row {
@@ -145,7 +154,6 @@
 }
 
 .hero-image {
-  /* Largura baseada no espaço do flex ao lado do .textos */
   flex: 1;
   min-width: 576px;
 
@@ -162,7 +170,7 @@
   object-position: center;
 }
 
-@media (width >= 1280px) {
+@media (width >=1280px) {
   .container {
     --max-width: 1050px;
   }
