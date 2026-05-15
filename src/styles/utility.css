@@ -19,6 +19,10 @@
   color: var(--color-dourado);
 }
 
+.color-cru-translucent {
+  color: rgba(252, 255, 255, 0.8);
+}
+
 /*BACKGROUNDS*/
 
 .bg-ebano {
@@ -74,6 +78,39 @@
   width: 100vw;
   height: 100vh;
   z-index: 100;
+}
+
+/* fontes */
+
+.font-jost {
+  font-family: var(--font-jost);
+}
+
+.font-cormorant {
+  font-family: var(--font-cormorant);
+  font-style: italic;
+}
+
+.font-serif {
+  font-family: var(--font-serif);
+}
+
+/* tamanhos de fonte */
+
+.fs-md {
+  font-size: var(--fs-md);
+}
+
+.fs-xl {
+  font-size: var(--fs-xl);
+}
+
+.fs-3xl {
+  font-size: var(--fs-3xl);
+}
+
+.fs-6xl {
+  font-size: var(--fs-6xl);
 }
 
 @media (width >=1280px) {

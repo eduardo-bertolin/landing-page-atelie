@@ -11,7 +11,7 @@ export default function Header() {
 
     return (
         <header>
-            <nav className="flex items-center py-sm">
+            <nav className="flex items-center">
                 <div className="container flex items-center justify-between">
                     <img src={Logo} alt="Logo Atelie Tati" width={220} height={80} />
                     <div className="desktop-only">
@@ -32,7 +32,7 @@ export default function Header() {
                     </div>
                     <div className="desktop-only">
                         <div className="flex items-center gap-4">
-                            <a className="reverse-color ml-lg" href="">
+                            <a className="color-dourado ml-lg" href="">
                                 Login
                             </a>
                             <Button text="Cadastre-se" />
