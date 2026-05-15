@@ -1,14 +1,7 @@
 import "../styles/utility.css";
-import Logo from "../assets/logo.svg";
-import "../styles/header.css";
-import { useState } from "react";
-import Button from "../components/Button";
-import MenuIcon from "../assets/menu.svg";
-import CloseIcon from "../assets/close.svg";
 import Costura from "../assets/images/costura.png";
-
+import Header from "../components/Header";
 export default function Home() {
-  const [showMobileMenu, setShowMobileMenu] = useState(false);
   const backgroundStyle = {
     backgroundColor: "var(--color-ebano)",
     backgroundImage: `repeating-linear-gradient(
@@ -21,85 +14,7 @@ export default function Home() {
   };
   return (
     <>
-      <header>
-        <nav className="flex items-center py-sm">
-          <div className="container flex items-center justify-between">
-            <img src={Logo} alt="Logo Atelie Tati" width={220} height={80} />
-            <div className="desktop-only">
-              <ul className="flex gap-1">
-                <li>
-                  <a href="#solucoes">Sobre</a>
-                </li>
-                <li>
-                  <a href="#depoimentos">Serviços</a>
-                </li>
-                <li>
-                  <a href="#precos">Portfólio</a>
-                </li>
-                <li>
-                  <a href="#contato">Contato</a>
-                </li>
-              </ul>
-            </div>
-            <div className="desktop-only">
-              <div className="flex items-center">
-                <a className="reverse-color ml-lg" href="">
-                  Login
-                </a>
-                <Button text="Cadastre-se" />
-              </div>
-            </div>
-            <div className="mobile-menu">
-              {showMobileMenu ? (
-                <div className="mobile-menu-content">
-                  <div className="container flex">
-                    <ul>
-                      <li>
-                        <a href="#">Home</a>
-                      </li>
-                      <li>
-                        <a href="#solution">Sobre</a>
-                      </li>
-                      <li>
-                        <a href="#testimonials">Serviços</a>
-                      </li>
-                      <li>
-                        <a href="#pricing">Portfólio</a>
-                      </li>
-                      <li>
-                        <a href="#contact">Contato</a>
-                      </li>
-                      <li>
-                        <a className="reverse-color" href="#">
-                          Login
-                        </a>
-                      </li>
-                    </ul>
-                    <span
-                      onClick={() => setShowMobileMenu(!showMobileMenu)}
-                      className="btn-wrapper"
-                    >
-                      <img
-                        src={CloseIcon}
-                        alt="ícone fechar menu"
-                        width={24}
-                        height={24}
-                      />
-                    </span>
-                  </div>
-                </div>
-              ) : (
-                <span
-                  onClick={() => setShowMobileMenu(!showMobileMenu)}
-                  className="btn-wrapper"
-                >
-                  <img src={MenuIcon} alt="ícone menu" width={24} height={24} />
-                </span>
-              )}
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       <main className="flex items-center">
         <section id="hero">

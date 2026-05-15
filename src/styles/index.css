@@ -1,3 +1,29 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ebano: var(--color-ebano);
+  --color-grafite: var(--color-grafite);
+  --color-terra: var(--color-terra);
+  --color-dourado: var(--color-dourado);
+  --color-cru: var(--color-cru);
+  --color-terra-muted: var(--color-terra-muted);
+  --color-cru-border: var(--color-cru-border);
+  --color-ebano-surface: var(--color-ebano-surface);
+  --color-cru-translucent: var(--color-cru-translucent);
+
+  --font-serif: var(--ff-serif);
+  --font-jost: var(--ff-jost);
+  --font-cormorant: var(--ff-cormorant);
+
+  --text-base: var(--fs-base);
+  --text-md: var(--fs-md);
+  --text-lg: var(--fs-lg);
+  --text-xl: var(--fs-xl);
+  --text-2xl: var(--fs-2xl);
+  --text-3xl: var(--fs-3xl);
+  --text-6xl: var(--fs-6xl);
+}
+
 *,
 *::before,
 *::after {
@@ -115,7 +141,7 @@
   --py-lg: 1.5rem;
   --py-xl: 3rem;
 
-  --px-lg: 1.5rem;
+  --px-lg: 1rem;
   --px-xl: 2rem;
 
   /* Nav bar altura*/
@@ -138,7 +164,10 @@ nav {
   top: 0;
   left: 0;
   width: 100%;
+  height: var(--nav-height);
   z-index: 100;
+  display: flex;
+  align-items: center;
 }
 
 section {
