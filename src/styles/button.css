@@ -8,7 +8,6 @@
   padding-inline: 1.5rem;
   border-radius: 0.1rem;
   cursor: pointer;
-  border: solid transparent 0.15rem;
 }
 
 .btn-primary:hover {
@@ -17,19 +16,18 @@
 
 .btn-secondary {
   width: 100%;
-  background: transparent;
-  color: var(--primary-color);
+  background: var(--color-dourado);
+  color: var(--color-ebano);
   font-weight: var(--fw-bold);
   font-size: var(--fs-base);
   padding-block: 0.825rem;
   padding-inline: 1.5rem;
   border-radius: 0.1rem;
   cursor: pointer;
-  border: solid var(--primary-color) 0.15rem;
 }
 
 .btn-secondary:hover {
-  background: var(--primary-color);
-  color: var(--light-text-color);
+  background: var(--color-bg-light);
+  color: var(--color-ebano);
   border-color: transparent;
 }

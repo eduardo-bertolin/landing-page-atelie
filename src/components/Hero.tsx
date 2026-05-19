@@ -1,6 +1,6 @@
 import "../styles/utility.css";
 import Costura from "../assets/images/costura.png";
-
+import Button from "./Button";
 export default function Hero() {
   const backgroundStyle = {
     backgroundColor: "var(--color-ebano)",
@@ -12,14 +12,14 @@ export default function Hero() {
   )`,
     minHeight: "calc(100vh - var(--nav-height))",
   };
-
   return (
-    <section id="hero">
+    <section id="hero" className="w-full">
       <div className="flex items-center background" style={backgroundStyle}>
-        <div className="container flex hero-row items-center">
-          <div className="textos desktop-only">
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+        <div className="container flex hero-row justify-between">
+          <div className="hidden xl:flex flex-col gap-[3rem] self-center">
+            <div className="flex items-center gap-4">
               <span className="line" />
+
               <span className="font-jost color-dourado uppercase fs-md ls-md">
                 Ateliê de Patchwork
               </span>
@@ -31,13 +31,21 @@ export default function Hero() {
                 propósito.
               </span>
             </h1>
-            <p className="font-cormorant color-cru-translucent fs-3xl max-w-3xs">
+            <p className="font-cormorant color-cru-translucent max-w-[350px] fs-xl ">
               Costura artesanal para quem acredita em peças únicas.
             </p>
+            <div className="flex items-center gap-4">
+              <Button text="Ver peças" secondary={true} />
+              <Button text="Ver coleções" secondary={false} />
+            </div>
           </div>
 
           <div className="hero-image desktop-only">
-            <img src={Costura} alt="Costura" />
+            <img
+              src={Costura}
+              alt="Costura artesanal"
+              className="w-[600px] h-[700px] object-cover"
+            />
           </div>
         </div>
       </div>
