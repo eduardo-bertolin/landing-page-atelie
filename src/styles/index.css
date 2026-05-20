@@ -15,29 +15,24 @@
   --font-jost: var(--ff-jost);
   --font-cormorant: var(--ff-cormorant);
 
-  --text-base: var(--fs-base);
-  --text-md: var(--fs-md);
-  --text-lg: var(--fs-lg);
-  --text-xl: var(--fs-xl);
-  --text-2xl: var(--fs-2xl);
-  --text-3xl: var(--fs-3xl);
-  --text-6xl: var(--fs-6xl);
 }
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+@layer base {
 
-* {
-  margin: 0;
-  padding: 0;
-  font: inherit;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  *,
+  *::before,
+  *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
 .dm-serif-display-regular {
@@ -122,25 +117,11 @@
   --fw-base: 400;
   --fw-bold: 500;
 
-  /*
-  TIPOGRAFIA - TAMANHOS
-  */
-
-  --fs-xs: 0.625rem;
-  --fs-sm: 0.875rem;
-  --fs-base: 1rem;
-  --fs-md: 1.125rem;
-  --fs-lg: 1.375rem;
-  --fs-xl: 1.625rem;
-  --fs-2xl: 2.25rem;
-  --fs-3xl: 2.625rem;
-  --fs-6xl: 4rem;
 
   --py-sm: 0.875rem;
   --py-base: 1rem;
   --py-lg: 1.5rem;
   --py-xl: 3rem;
-
   --px-lg: 1rem;
   --px-xl: 2rem;
 
@@ -151,12 +132,12 @@
 html {
   font-family: var(--ff-jost);
   font-weight: var(--fw-base);
-  font-size: var(--fs-base);
   line-height: 1.6;
   overflow-x: hidden;
   scroll-behavior: smooth;
   background-color: var(--color-cru);
 }
+
 
 nav {
   background-color: var(--color-cru);
@@ -171,7 +152,6 @@ nav {
 }
 
 section {
-  height: calc(100vh - var(--nav-height));
   width: 100vw;
 }
 
@@ -179,44 +159,14 @@ main {
   padding-top: var(--nav-height);
 }
 
-h1,
-h2,
-h3 {
-  line-height: 1.2;
-  color: var(--color-ebano);
-  font-weight: var(--fw-bold);
-  letter-spacing: -0.04em;
-}
 
-h1 {
-  font-size: var(--fs-3xl);
-}
 
-h2 {
-  font-size: var(--fs-2xl);
-}
-
-h3 {
-  font-size: var(--fs-xl);
-}
-
-h4 {
-  font-size: var(--fs-lg);
-}
-
-h5 {
-  font-size: var(--fs-md);
-}
-
-h6 {
-  font-size: var(--fs-sm);
-}
 
 a {
   text-decoration: none;
   color: var(--color-ebano);
   font-weight: var(--fw-base);
-  font-size: var(--fs-md);
+  @apply text-lg;
 }
 
 a:hover {
@@ -239,17 +189,4 @@ img {
 ul,
 ol {
   list-style: none;
-}
-
-@media (max-width: 1280px) {
-  :root {
-    --fs-xs: 0.625rem;
-    --fs-sm: 1rem;
-    --fs-base: 1.5rem;
-    --fs-md: 1.75rem;
-    --fs-lg: 2rem;
-    --fs-xl: 2.5rem;
-    --fs-2xl: 3rem;
-    --fs-3xl: 4rem;
-  }
 }

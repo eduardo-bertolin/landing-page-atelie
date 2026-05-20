@@ -14,7 +14,7 @@ export default function Header() {
             <nav className="flex items-center">
                 <div className="container flex items-center justify-between">
                     <img src={Logo} alt="Logo Atelie Tati" width={220} height={80} />
-                    <div className="desktop-only">
+                    <div className="hidden xl:flex">
                         <ul className="flex gap-4">
                             <li>
                                 <a href="#sobre">Sobre</a>
@@ -35,7 +35,7 @@ export default function Header() {
                             <a className="color-dourado ml-lg" href="">
                                 Login
                             </a>
-                            <Button text="Cadastre-se" />
+                            <Button text="Solicitar orçamento" />
                         </div>
                     </div>
                     <div className="mobile-menu">
