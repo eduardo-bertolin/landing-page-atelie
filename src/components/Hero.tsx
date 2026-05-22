@@ -3,14 +3,14 @@ import Costura from "../assets/images/costura.png";
 import Button from "./Button";
 export default function Hero() {
   return (
-    <section id="hero" className="w-full min-h-[calc(100vh-var(--nav-height))]">
-      <div className="flex items-center background hero-bg py-12 xl:py-0 min-h-[calc(100vh-var(--nav-height))]" >
+    <section id="hero" className="w-full section-h">
+      <div className="flex items-center background bg-ebano py-12 xl:py-0 section-h" >
         <div className="container flex flex-col xl:flex-row justify-between gap-12 xl:gap-0">
           <div className="flex flex-col gap-8 xl:gap-[3rem] self-center">
             <div className="flex items-center gap-4">
               <span className="line" />
 
-              <span className="font-jost color-dourado uppercase text-lg ls-md">
+              <span className="font-jost color-dourado uppercase text-lg tracking-[0.375rem]">
                 Ateliê de Patchwork
               </span>
             </div>

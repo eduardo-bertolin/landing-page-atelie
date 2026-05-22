@@ -3,7 +3,7 @@ import Maquina from "../assets/maquina.svg";
 
 export default function Sobre() {
     return (
-        <section id="sobre" className="bg-cru w-full min-h-[calc(100vh-var(--nav-height))] flex items-center justify-center">
+        <section id="sobre" className="bg-cru w-full section-h flex items-center justify-center">
             <div className="container">
                 <div className="grid grid-cols-1 xl:grid-cols-2 items-stretch gap-12 py-12 w-full">
                     <div className="order-1 xl:col-start-2 flex flex-col items-start">
