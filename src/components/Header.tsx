@@ -13,7 +13,9 @@ export default function Header() {
         <header>
             <nav className="flex items-center">
                 <div className="container flex items-center justify-between">
-                    <img src={Logo} alt="Logo Atelie Tati" width={220} height={80} />
+                    <a href="#">
+                        <img src={Logo} alt="Logo Atelie Tati" width={220} height={80} />
+                    </a>
                     <div className="hidden xl:flex">
                         <ul className="flex gap-4">
                             <li>
@@ -31,10 +33,7 @@ export default function Header() {
                         </ul>
                     </div>
                     <div className="desktop-only">
-                        <div className="flex items-center gap-4">
-                            <a className="color-dourado ml-lg" href="">
-                                Login
-                            </a>
+                        <div className="flex items-center">
                             <Button text="Solicitar orçamento" />
                         </div>
                     </div>
@@ -44,19 +43,20 @@ export default function Header() {
                                 <div className="container flex flex-col items-center justify-center h-full relative">
                                     <ul className="flex flex-col gap-8 text-center text-2xl font-jost uppercase tracking-widest">
                                         <li>
-                                            <a href="#" className="color-ebano">Home</a>
+                                            <a href="#" className="color-ebano" onClick={() => setShowMobileMenu(false)}>Home</a>
+
                                         </li>
                                         <li>
-                                            <a href="#sobre" className="color-ebano">Sobre</a>
+                                            <a href="#sobre" className="color-ebano" onClick={() => setShowMobileMenu(false)}>Sobre</a>
                                         </li>
                                         <li>
-                                            <a href="#servicos" className="color-ebano">Serviços</a>
+                                            <a href="#servicos" className="color-ebano" onClick={() => setShowMobileMenu(false)}>Serviços</a>
                                         </li>
                                         <li>
-                                            <a href="#portfolio" className="color-ebano">Portfólio</a>
+                                            <a href="#portfolio" className="color-ebano" onClick={() => setShowMobileMenu(false)}>Portfólio</a>
                                         </li>
                                         <li>
-                                            <a href="#contato" className="color-ebano">Contato</a>
+                                            <a href="#contato" className="color-ebano" onClick={() => setShowMobileMenu(false)}>Contato</a>
                                         </li>
                                         <li>
                                             <a className="color-ebano" href="#">

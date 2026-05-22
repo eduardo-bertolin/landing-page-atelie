@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Info from "../components/Info";
 import Sobre from "../components/Sobre";
+import Servicos from "../components/Servicos";
 export default function Home() {
   return (
     <>
@@ -13,6 +14,7 @@ export default function Home() {
       </main>
       <Info />
       <Sobre />
+      <Servicos />
     </>
   );
 }
