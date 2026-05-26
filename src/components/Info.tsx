@@ -1,6 +1,6 @@
 export default function Info() {
     return (
-        <section id="informacoes" className="xl:flex w-full h-auto bg-[var(--color-cru)] border-b-2 border-black/10">
+        <section id="informacoes" className="xl:flex w-full h-auto border-b-2 border-black/10">
             <div className="container flex justify-between my-3">
                 <div className="flex gap-2 flex-col items-center">
                     <span className="font-serif text-3xl xl:text-5xl text-terra">12+</span>
