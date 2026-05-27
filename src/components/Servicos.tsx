@@ -5,14 +5,14 @@ import Ajustes from "../assets/ajustes.svg";
 export default function Servicos() {
     return (
         <section id="servicos" className="bg-ebano w-full section-h flex items-center justify-center ">
-            <div className="container flex flex-col items-center py-12">
+            <div className="container flex flex-col items-center justify-between">
 
-                <div className="flex flex-col items-center text-center mb-12">
+                <div className="flex flex-col items-center text-center mb-6">
                     <span className="font-jont color-terra font-bold text-sm tracking-[0.375rem] uppercase">Nossas especialidades</span>
-                    <div className="flex flex-row gap-3 justify-center items-center mt-2">
-                        <h3 className="font-serif color-cru font-bold text-5xl">Serviços</h3>
+                    <h2 className="flex flex-row gap-3 justify-center items-center font-serif color-cru font-bold text-5xl">
+                        <span>Serviços</span>
                         <span className="font-cormorant color-terra font-light text-5xl italic">Exclusivos</span>
-                    </div>
+                    </h2>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full h-auto">
