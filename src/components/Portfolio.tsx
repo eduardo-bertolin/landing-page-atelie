@@ -214,14 +214,14 @@ export default function Portfolio() {
                 onMouseEnter={() => setIsHovered(true)}
                 onTouchStart={() => setIsHovered(true)}
                 onTouchEnd={() => setIsHovered(false)}
-                className="w-full flex flex-row gap-6 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none py-4 px-10"
+                className="w-full flex flex-row gap-3 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none py-4 px-10"
             >
                 {tripleCards.map((card, index) => (
                     <div
                         key={index}
-                        className="group shrink-0 flex flex-col gap-4 w-[15rem] xl:w-[30rem]"
+                        className="group shrink-0 flex flex-col gap-2 w-[15rem] xl:w-[25rem]"
                     >
-                        <div className="w-full h-[20rem] xl:h-[35rem] overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-[1.01]">
+                        <div className="w-full h-[22rem] xl:h-[30rem] overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-[1.01]">
                             <img
                                 src={card.image}
                                 alt={card.alt}
