@@ -5,6 +5,7 @@ import Info from "../components/Info";
 import Sobre from "../components/Sobre";
 import Servicos from "../components/Servicos";
 import Portfolio from "../components/Portfolio";
+import Avaliacoes from "../components/Avaliacoes";
 export default function Home() {
   return (
     <>
@@ -17,6 +18,7 @@ export default function Home() {
       <Sobre />
       <Servicos />
       <Portfolio />
+      <Avaliacoes />
     </>
   );
 }

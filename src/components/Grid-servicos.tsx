@@ -1,10 +1,10 @@
-interface GridInfoProps {
+interface GridServicosProps {
     icon: string;
     title: string;
     description: string;
 }
 
-export default function GridInfo({ icon, title, description }: GridInfoProps) {
+export default function GridServicos({ icon, title, description }: GridServicosProps) {
     return (
         <div className="group border border-(--color-dourado) rounded-xs w-auto h-auto flex flex-col justify-start p-7 gap-4 transition-all duration-500 hover:bg-terra/40 hover:border-(--color-dourado)">
             <img src={icon} alt={title} className="w-10 h-10 transition-transform duration-300 group-hover:-translate-x-4" />
