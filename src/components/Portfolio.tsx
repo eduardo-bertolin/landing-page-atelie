@@ -22,17 +22,28 @@ export default function Portfolio() {
         { id: 4, titulo: "bunda enorme gigantesca", image: Costura, alt: "Peças exclusivas e patchwork" },
     ];
 
-    // Duplicamos a lista 3 vezes para criar o loop contínuo infinito nos dois sentidos
-    const tripleCards = [...cards, ...cards, ...cards];
+    // Multiplicamos a lista 10 vezes para garantir que o carrossel nunca chegue aos limites físicos (o que causava o "travamento")
+    const duplicatedCards = Array(10).fill(cards).flat();
 
-    // Inicializa o carrossel no meio (no início do segundo grupo de cards)
+    const getSingleSetWidth = () => {
+        const container = containerRef.current;
+        if (!container || container.children.length < cards.length + 1) return 0;
+        // Mede a distância entre o início do primeiro card e o início do primeiro card do próximo conjunto
+        const firstCard = container.children[0] as HTMLElement;
+        const nextSetCard = container.children[cards.length] as HTMLElement;
+        return nextSetCard.offsetLeft - firstCard.offsetLeft;
+    };
+
+    // Inicializa o carrossel no meio 
     useEffect(() => {
         const container = containerRef.current;
         if (!container) return;
 
         const initScroll = () => {
-            const singleSetWidth = container.scrollWidth / 3;
-            container.scrollLeft = singleSetWidth;
+            const width = getSingleSetWidth();
+            if (width > 0) {
+                container.scrollLeft = width * 4;
+            }
         };
 
         // Pequeno timeout para garantir que o layout renderizou na tela antes de calcular a largura
@@ -45,15 +56,16 @@ export default function Portfolio() {
         const container = containerRef.current;
         if (!container || isDraggingRef.current) return; // Evita interferir no meio do arrasto físico do usuário
 
-        const singleSetWidth = container.scrollWidth / 3;
+        const width = getSingleSetWidth();
+        if (width === 0) return;
 
-        // Se rolar muito para a direita (chegando no terceiro bloco), pula de volta para o meio
-        if (container.scrollLeft >= singleSetWidth * 2) {
-            container.scrollLeft -= singleSetWidth;
+        // Se rolar muito para a direita
+        if (container.scrollLeft >= width * 6) {
+            container.scrollLeft -= width * 2;
         }
-        // Se rolar muito para a esquerda (chegando no primeiro bloco), pula para o meio
-        else if (container.scrollLeft <= 2) {
-            container.scrollLeft += singleSetWidth;
+        // Se rolar muito para a esquerda
+        else if (container.scrollLeft <= width * 3) {
+            container.scrollLeft += width * 2;
         }
     };
 
@@ -72,9 +84,9 @@ export default function Portfolio() {
                 container.scrollLeft += 0.8;
 
                 // Loop infinito também durante o autoplay
-                const singleSetWidth = container.scrollWidth / 3;
-                if (container.scrollLeft >= singleSetWidth * 2) {
-                    container.scrollLeft -= singleSetWidth;
+                const width = getSingleSetWidth();
+                if (width > 0 && container.scrollLeft >= width * 6) {
+                    container.scrollLeft -= width * 2;
                 }
             }
             animationFrameId = requestAnimationFrame(scroll);
@@ -102,11 +114,13 @@ export default function Portfolio() {
             container.scrollLeft -= velocityRef.current;
 
             // Mantém o loop infinito rodando perfeitamente durante a desaceleração
-            const singleSetWidth = container.scrollWidth / 3;
-            if (container.scrollLeft >= singleSetWidth * 2) {
-                container.scrollLeft -= singleSetWidth;
-            } else if (container.scrollLeft <= 2) {
-                container.scrollLeft += singleSetWidth;
+            const width = getSingleSetWidth();
+            if (width > 0) {
+                if (container.scrollLeft >= width * 6) {
+                    container.scrollLeft -= width * 2;
+                } else if (container.scrollLeft <= width * 3) {
+                    container.scrollLeft += width * 2;
+                }
             }
 
             // Continua animando enquanto a velocidade for perceptível (maior que 0.2px por frame)
@@ -171,15 +185,17 @@ export default function Portfolio() {
         lastXRef.current = e.pageX;
 
         // Ajusta o loop infinito também durante o arrasto se passar dos limites
-        const singleSetWidth = container.scrollWidth / 3;
-        if (container.scrollLeft >= singleSetWidth * 2) {
-            container.scrollLeft -= singleSetWidth;
-            setStartX(e.pageX - container.offsetLeft);
-            setScrollLeftState(container.scrollLeft);
-        } else if (container.scrollLeft <= 2) {
-            container.scrollLeft += singleSetWidth;
-            setStartX(e.pageX - container.offsetLeft);
-            setScrollLeftState(container.scrollLeft);
+        const width = getSingleSetWidth();
+        if (width > 0) {
+            if (container.scrollLeft >= width * 6) {
+                container.scrollLeft -= width * 2;
+                setStartX(e.pageX - container.offsetLeft);
+                setScrollLeftState(container.scrollLeft);
+            } else if (container.scrollLeft <= width * 3) {
+                container.scrollLeft += width * 2;
+                setStartX(e.pageX - container.offsetLeft);
+                setScrollLeftState(container.scrollLeft);
+            }
         }
     };
 
@@ -216,7 +232,7 @@ export default function Portfolio() {
                 onTouchEnd={() => setIsHovered(false)}
                 className="w-full flex flex-row gap-3 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none py-4 px-10"
             >
-                {tripleCards.map((card, index) => (
+                {duplicatedCards.map((card, index) => (
                     <div
                         key={index}
                         className="group shrink-0 flex flex-col gap-2 w-[15rem] xl:w-[25rem]"
