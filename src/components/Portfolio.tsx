@@ -3,7 +3,7 @@ import Costura from "../assets/images/costura.png";
 
 export default function Portfolio() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [isDragging, setIsDragging] = useState(false);
+    const [, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
     const [scrollLeftState, setScrollLeftState] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
