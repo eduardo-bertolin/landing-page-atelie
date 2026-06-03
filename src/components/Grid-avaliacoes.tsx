@@ -5,11 +5,10 @@ interface GridAvaliacoesProps {
     stars: number;
     comment: string;
     name: string;
-    photo: string;
     profession: string;
 }
 
-export default function GridAvaliacoes({ stars, comment, photo, name, profession }: GridAvaliacoesProps) {
+export default function GridAvaliacoes({ stars, comment, name, profession }: GridAvaliacoesProps) {
     return (
         <div className="group w-auto h-auto flex flex-col justify-start p-7 gap-4">
             <div className="flex gap-1">
