@@ -74,6 +74,8 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
+    //transporte de email
+
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,
         port: Number(process.env.SMTP_PORT ?? 587),

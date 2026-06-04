@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "./Button";
 
 export default function Contato() {
     const [email, setEmail] = useState("");
@@ -64,7 +65,7 @@ export default function Contato() {
                             required
                             placeholder="exemplo@email.com"
                             value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={(event) => setEmail(event.target.value)}
                             disabled={status === "loading"}
                             className="w-full p-4 border border-gray-300 focus:outline-none focus:border-terra transition-colors"
                         />
@@ -84,13 +85,13 @@ export default function Contato() {
                         ></textarea>
                     </div>
 
-                    <button
+                    <Button
                         type="submit"
+                        variant="terra"
                         disabled={status === "loading"}
-                        className="w-full bg-terra text-white font-jont font-bold uppercase tracking-wider py-4 mt-2 hover:bg-ebano transition-colors disabled:opacity-70 disabled:cursor-not-allowed active:scale-97 transition-transform cursor-pointer"
-                    >
-                        {status === "loading" ? "Enviando..." : "Enviar Mensagem"}
-                    </button>
+                        text={status === "loading" ? "Enviando..." : "Enviar Mensagem"}
+                        className="font-jont font-bold uppercase tracking-wider py-4 mt-2"
+                    />
 
                     {feedbackMsg && (
                         <div className={`p-4 text-center ${status === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
