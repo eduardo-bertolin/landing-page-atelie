@@ -34,7 +34,9 @@ export default function Header() {
                     </div>
                     <div className="desktop-only">
                         <div className="flex items-center">
-                            <Button text="Solicitar orçamento" />
+                            <Button
+
+                                text="Solicitar orçamento" />
                         </div>
                     </div>
                     <div className="mobile-menu">

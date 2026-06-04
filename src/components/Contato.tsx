@@ -39,21 +39,21 @@ export default function Contato() {
     };
 
     return (
-        <section id="contato" className="w-full py-20 flex flex-col items-center bg-gray-50">
+        <section id="contato" className="w-full py-20 flex flex-col items-center bg-ebano">
             <div className="container flex flex-col items-center gap-8 w-full px-5">
                 <div className="flex flex-col items-center text-center gap-3">
                     <span className="font-jont font-bold text-sm text-terra tracking-[0.375rem] uppercase">Fale Conosco</span>
-                    <h2 className="font-serif text-3xl xl:text-5xl text-ebano">
+                    <h2 className="font-serif text-3xl xl:text-5xl text-cru">
                         <span>Entre em </span>
                         <span className="font-light italic text-terra">Contato</span>
                     </h2>
-                    <p className="text-grafite max-w-lg mt-2">
+                    <p className="text-cru max-w-lg mt-2">
                         Tem alguma dúvida ou gostaria de fazer um pedido personalizado? Preencha o formulário abaixo e retornaremos o mais breve possível.
                     </p>
                 </div>
 
-                <form 
-                    onSubmit={handleSubmit} 
+                <form
+                    onSubmit={handleSubmit}
                     className="w-full max-w-2xl bg-white p-8 xl:p-12 shadow-lg flex flex-col gap-6"
                 >
                     <div className="flex flex-col gap-2">
@@ -87,7 +87,7 @@ export default function Contato() {
                     <button
                         type="submit"
                         disabled={status === "loading"}
-                        className="w-full bg-terra text-white font-jont font-bold uppercase tracking-wider py-4 mt-2 hover:bg-ebano transition-colors disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full bg-terra text-white font-jont font-bold uppercase tracking-wider py-4 mt-2 hover:bg-ebano transition-colors disabled:opacity-70 disabled:cursor-not-allowed active:scale-97 transition-transform cursor-pointer"
                     >
                         {status === "loading" ? "Enviando..." : "Enviar Mensagem"}
                     </button>

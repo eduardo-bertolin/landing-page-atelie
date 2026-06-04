@@ -13,6 +13,7 @@ export default function Portfolio() {
     const lastXRef = useRef(0);
     const velocityRef = useRef(0);
     const momentumFrameId = useRef<number | null>(null);
+    const scrollPosRef = useRef(0);
 
     // Representação dos seus cards. Adicione a imagem importada correspondente em cada objeto!
     const cards = [
@@ -27,11 +28,14 @@ export default function Portfolio() {
 
     const getSingleSetWidth = () => {
         const container = containerRef.current;
-        if (!container || container.children.length < cards.length + 1) return 0;
-        // Mede a distância entre o início do primeiro card e o início do primeiro card do próximo conjunto
-        const firstCard = container.children[0] as HTMLElement;
-        const nextSetCard = container.children[cards.length] as HTMLElement;
-        return nextSetCard.offsetLeft - firstCard.offsetLeft;
+        if (!container) return 0;
+        if (container.children.length >= cards.length + 1) {
+            const firstCard = container.children[0] as HTMLElement;
+            const nextSetCard = container.children[cards.length] as HTMLElement;
+            const diff = nextSetCard.offsetLeft - firstCard.offsetLeft;
+            if (diff > 0) return diff;
+        }
+        return container.scrollWidth / 10;
     };
 
     // Inicializa o carrossel no meio 
@@ -42,7 +46,9 @@ export default function Portfolio() {
         const initScroll = () => {
             const width = getSingleSetWidth();
             if (width > 0) {
-                container.scrollLeft = width * 4;
+                const initialScroll = width * 4;
+                container.scrollLeft = initialScroll;
+                scrollPosRef.current = initialScroll;
             }
         };
 
@@ -80,14 +86,23 @@ export default function Portfolio() {
             // Apenas executa o autoplay se não estiver arrastando, não estiver com o mouse por cima
             // E se a inércia (momentum) do último arrasto já tiver parado
             if (!isDraggingRef.current && !isHovered && Math.abs(velocityRef.current) < 0.2) {
-                // Aumente ou diminua este valor para controlar a velocidade do slide automático (ex: 0.8)
-                container.scrollLeft += 0.8;
+                // Sincroniza a posição caso o usuário tenha rolado manualmente
+                if (Math.abs(scrollPosRef.current - container.scrollLeft) > 1) {
+                    scrollPosRef.current = container.scrollLeft;
+                }
+
+                // Incrementa a posição real com precisão de ponto flutuante
+                scrollPosRef.current += 0.8;
 
                 // Loop infinito também durante o autoplay
                 const width = getSingleSetWidth();
-                if (width > 0 && container.scrollLeft >= width * 6) {
-                    container.scrollLeft -= width * 2;
+                if (width > 0 && scrollPosRef.current >= width * 6) {
+                    scrollPosRef.current -= width * 2;
                 }
+                container.scrollLeft = scrollPosRef.current;
+            } else {
+                // Sincroniza a posição enquanto o usuário arrasta ou ocorre a inércia
+                scrollPosRef.current = container.scrollLeft;
             }
             animationFrameId = requestAnimationFrame(scroll);
         };
@@ -207,7 +222,7 @@ export default function Portfolio() {
     }, []);
 
     return (
-        <section id="portfolio" className="w-full section-h flex flex-col items-center justify-start overflow-hidden">
+        <section id="portfolio" className="w-full h-[42rem] xl:section-h flex flex-col items-center justify-start overflow-hidden">
             <div className="container flex flex-row justify-between items-end w-full py-10">
                 <div className="flex flex-col gap-3 xl:gap-0 items-start">
                     <span className="font-jont font-bold text-sm text-terra tracking-[0.375rem] uppercase">Nossa galeria</span>
@@ -230,6 +245,7 @@ export default function Portfolio() {
                 onMouseEnter={() => setIsHovered(true)}
                 onTouchStart={() => setIsHovered(true)}
                 onTouchEnd={() => setIsHovered(false)}
+                onTouchCancel={() => setIsHovered(false)}
                 className="w-full flex flex-row gap-3 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none py-4 px-10"
             >
                 {duplicatedCards.map((card, index) => (
@@ -243,7 +259,7 @@ export default function Portfolio() {
                                 alt={card.alt}
                                 draggable="false"
                                 onDragStart={(e) => e.preventDefault()}
-                                className="w-full h-full object-cover grayscale-0 md:grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out select-none"
+                                className="w-full h-full object-cover grayscale-0 xl:grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out select-none"
                             />
                         </div>
 

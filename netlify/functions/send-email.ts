@@ -6,6 +6,8 @@ interface ContactPayload {
     message: string;
 }
 
+//cfg cors
+
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "";
 
 const corsHeaders = (origin: string) => ({
@@ -13,6 +15,8 @@ const corsHeaders = (origin: string) => ({
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
 });
+
+
 
 const handler: Handler = async (event: HandlerEvent) => {
     const origin = event.headers["origin"] ?? "";
@@ -25,6 +29,8 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
+    //permite apenas metodo post
+
     if (event.httpMethod !== "POST") {
         return {
             statusCode: 405,
@@ -33,6 +39,9 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
+    //transforma o body em json
+
+    //
     let payload: ContactPayload;
 
     try {
@@ -45,6 +54,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
+    //desestruturacao
     const { email, message } = payload;
 
     if (!email?.trim() || !message?.trim()) {
