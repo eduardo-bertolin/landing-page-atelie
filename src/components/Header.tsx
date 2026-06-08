@@ -3,6 +3,8 @@ import MenuIcon from "../assets/menu.svg";
 import CloseIcon from "../assets/close.svg";
 import Logo from "../assets/logo.svg";
 import { useState } from "react";
+import Maquina from "../assets/maquina.svg";
+
 
 
 
@@ -13,8 +15,13 @@ export default function Header() {
         <header>
             <nav className="flex items-center">
                 <div className="container flex items-center justify-between">
-                    <a href="#">
-                        <img src={Logo} alt="Logo Atelie Tati" width={220} height={80} />
+                    <a href="#" className="flex items-center">
+                        <img src={Maquina} alt="Logo Atelie Tati" width={140} height={140} />
+                        <div className="flex flex-col">
+                            <p className="font-serif text-ebano text-xl uppercase">Ateliê Tati Bertolin</p>
+                            <p className="font-cormorant text-ebano text-sm font-bold uppercase">Costura & Criatividade</p>
+
+                        </div>
                     </a>
                     <div className="hidden xl:flex">
                         <ul className="flex gap-4">

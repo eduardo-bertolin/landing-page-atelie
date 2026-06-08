@@ -17,10 +17,10 @@ export default function Portfolio() {
 
     // Representação dos seus cards. Adicione a imagem importada correspondente em cada objeto!
     const cards = [
-        { id: 1, titulo: "bunda enorme gigantesca", image: Costura, alt: "Trabalho de Costura e acabamento" },
-        { id: 2, titulo: "bunda enorme gigantesca", image: Costura, alt: "Confecção artesanal sob medida" },
-        { id: 3, titulo: "bunda enorme gigantesca", image: Costura, alt: "Detalhes de costura criativa" },
-        { id: 4, titulo: "bunda enorme gigantesca", image: Costura, alt: "Peças exclusivas e patchwork" },
+        { id: 1, titulo: "Produto 1", image: Costura, alt: "Trabalho de Costura e acabamento" },
+        { id: 2, titulo: "Produto 2", image: Costura, alt: "Confecção artesanal sob medida" },
+        { id: 3, titulo: "Produto 3", image: Costura, alt: "Detalhes de costura criativa" },
+        { id: 4, titulo: "Produto 4", image: Costura, alt: "Peças exclusivas e patchwork" },
     ];
 
     // Multiplicamos a lista 10 vezes para garantir que o carrossel nunca chegue aos limites físicos (o que causava o "travamento")
