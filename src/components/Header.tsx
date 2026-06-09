@@ -1,10 +1,8 @@
 import Button from "../components/Button";
 import MenuIcon from "../assets/menu.svg";
 import CloseIcon from "../assets/close.svg";
-import Logo from "../assets/logo.svg";
+import Logo from "./Logo";
 import { useState } from "react";
-import Maquina from "../assets/maquina.svg";
-
 
 
 
@@ -16,10 +14,7 @@ export default function Header() {
             <nav className="flex items-center">
                 <div className="container flex items-center justify-between">
                     <a href="#" className="flex items-center h-auto gap-1">
-                        <img src={Maquina} alt="Logo Atelie Tati" width={70} height={70} className="scale-[1.8]" />
-                        <div className="flex flex-col">
-                            <p className="font-cormorant font-bold text-ebano text-xl uppercase">Ateliê Tati Bertolin</p>
-                        </div>
+                        <Logo />
                     </a>
                     <div className="hidden xl:flex">
                         <ul className="flex gap-4">
@@ -39,9 +34,9 @@ export default function Header() {
                     </div>
                     <div className="desktop-only">
                         <div className="flex items-center">
-                            <Button
-
-                                text="Solicitar orçamento" />
+                            <a href="#contato">
+                                <Button text="Solicitar orçamento" />
+                            </a>
                         </div>
                     </div>
                     <div className="mobile-menu">

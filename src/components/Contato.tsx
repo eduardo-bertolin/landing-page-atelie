@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "./Button";
+import Whatsapp from "../assets/whatsapp.svg"
 
 export default function Contato() {
     const [email, setEmail] = useState("");
@@ -40,7 +41,7 @@ export default function Contato() {
     };
 
     return (
-        <section id="contato" className="w-full py-20 flex flex-col items-center bg-ebano">
+        <section id="contato" className="relative w-full section-h py-20 flex flex-col items-center bg-ebano">
             <div className="container flex flex-col items-center gap-8 w-full px-5">
                 <div className="flex flex-col items-center text-center gap-3">
                     <span className="font-jont font-bold text-sm text-terra tracking-[0.375rem] uppercase">Fale Conosco</span>
@@ -83,6 +84,7 @@ export default function Contato() {
                             disabled={status === "loading"}
                             className="w-full p-4 border border-gray-300 focus:outline-none focus:border-terra transition-colors resize-none"
                         ></textarea>
+
                     </div>
 
                     <Button
@@ -99,7 +101,14 @@ export default function Contato() {
                         </div>
                     )}
                 </form>
+
             </div>
+            <div className="absolute bottom-16 right-30 hover:scale-110 transition-transform cursor-pointer hover:brightness-110">
+                <a href="">
+                    <img src={Whatsapp} alt="" width={80} height={80} />
+                </a>
+            </div>
+
         </section>
     );
 }
