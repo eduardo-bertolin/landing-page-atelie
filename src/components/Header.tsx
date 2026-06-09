@@ -15,12 +15,10 @@ export default function Header() {
         <header>
             <nav className="flex items-center">
                 <div className="container flex items-center justify-between">
-                    <a href="#" className="flex items-center">
-                        <img src={Maquina} alt="Logo Atelie Tati" width={140} height={140} />
+                    <a href="#" className="flex items-center h-auto gap-1">
+                        <img src={Maquina} alt="Logo Atelie Tati" width={70} height={70} className="scale-[1.8]" />
                         <div className="flex flex-col">
-                            <p className="font-serif text-ebano text-xl uppercase">Ateliê Tati Bertolin</p>
-                            <p className="font-cormorant text-ebano text-sm font-bold uppercase">Costura & Criatividade</p>
-
+                            <p className="font-cormorant font-bold text-ebano text-xl uppercase">Ateliê Tati Bertolin</p>
                         </div>
                     </a>
                     <div className="hidden xl:flex">

@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Costura from "../assets/images/costura.png";
+import Prod1 from "../assets/images/prod1.jpeg";
+import Prod2 from "../assets/images/prod2.jpeg";
+import Prod3 from "../assets/images/prod3.jpeg";
+import Prod4 from "../assets/images/prod4.jpeg";
+import Prod5 from "../assets/images/prod5.jpeg";
+
 
 export default function Portfolio() {
     const containerRef = useRef<HTMLDivElement>(null);
@@ -17,10 +23,11 @@ export default function Portfolio() {
 
     // Representação dos seus cards. Adicione a imagem importada correspondente em cada objeto!
     const cards = [
-        { id: 1, titulo: "Produto 1", image: Costura, alt: "Trabalho de Costura e acabamento" },
-        { id: 2, titulo: "Produto 2", image: Costura, alt: "Confecção artesanal sob medida" },
-        { id: 3, titulo: "Produto 3", image: Costura, alt: "Detalhes de costura criativa" },
-        { id: 4, titulo: "Produto 4", image: Costura, alt: "Peças exclusivas e patchwork" },
+        { id: 1, titulo: "Produto 1", image: Prod1, alt: "Trabalho de Costura e acabamento" },
+        { id: 2, titulo: "Produto 2", image: Prod2, alt: "Confecção artesanal sob medida" },
+        { id: 3, titulo: "Produto 3", image: Prod3, alt: "Detalhes de costura criativa" },
+        { id: 4, titulo: "Produto 4", image: Prod4, alt: "Peças exclusivas e patchwork" },
+        { id: 5, titulo: "Produto 5", image: Prod5, alt: "Peças exclusivas e patchwork" },
     ];
 
     // Multiplicamos a lista 10 vezes para garantir que o carrossel nunca chegue aos limites físicos (o que causava o "travamento")
@@ -263,7 +270,6 @@ export default function Portfolio() {
                             />
                         </div>
 
-                        {/* Textos de identificação posicionados abaixo da imagem */}
                         <div className="">
                             <h3 className="font-serif text-xl xl:text-2xl text-ebano">
                                 {card.titulo}
