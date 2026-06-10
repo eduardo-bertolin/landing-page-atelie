@@ -9,10 +9,10 @@ import GridServicos from "./Grid-servicos";
 
 export default function Servicos() {
     return (
-        <section id="servicos" className="bg-ebano w-full section-h flex items-center justify-center ">
-            <div className="container flex flex-col items-center justify-between">
+        <section id="servicos" className="bg-ebano w-full section-h flex items-center ">
+            <div className="container flex flex-col items-center py-6 xl:py-0">
 
-                <div className="flex flex-col items-center text-center m-12 xl:mt-0">
+                <div className="flex flex-col items-center text-center gap-2 pb-6">
                     <span className="font-jont color-dourado font-bold text-sm tracking-[0.375rem] uppercase">Nossas especialidades</span>
                     <h2 className="justify-center items-center font-serif color-cru font-bold text-5xl">
                         <span>Serviços{" "}</span>

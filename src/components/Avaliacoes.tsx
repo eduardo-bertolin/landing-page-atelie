@@ -2,7 +2,7 @@ import GridAvaliacoes from "./Grid-avaliacoes";
 
 export default function Avaliacoes() {
     return (
-        <div className="container flex flex-col xl:flex-row h-auto my-10 gap-1 w-full">
+        <div className="container flex flex-col xl:flex-row h-auto my-2 gap-1">
             <div className="h-60 w-full xl:w-1/3">
                 <GridAvaliacoes stars={5} comment={`"A Tati que costurou meu traje, ficou perfeito!"`} name="Daredevil" profession="Vigilante" image="https://images.bauerhosting.com/empire/2026/01/daredevil-born-again-s2-1.jpg?ar=16%3A9&fit=crop&crop=top&auto=format&w=1440&q=80" />
             </div>

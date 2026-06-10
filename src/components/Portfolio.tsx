@@ -259,7 +259,7 @@ export default function Portfolio() {
                         key={index}
                         className="group shrink-0 flex flex-col gap-2 w-[15rem] xl:w-[25rem]"
                     >
-                        <div className="w-full h-[22rem] xl:h-[30rem] overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-[1.01]">
+                        <div className="w-full h-[25rem] xl:h-[30rem] overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-[1.01]">
                             <img
                                 src={card.image}
                                 alt={card.alt}

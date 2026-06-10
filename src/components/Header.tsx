@@ -33,11 +33,9 @@ export default function Header() {
                         </ul>
                     </div>
                     <div className="desktop-only">
-                        <div className="flex items-center">
-                            <a href="#contato">
-                                <Button text="Solicitar orçamento" />
-                            </a>
-                        </div>
+                        <a href="#contato">
+                            <Button text="Solicitar orçamento" variant="primary" />
+                        </a>
                     </div>
                     <div className="mobile-menu">
                         {showMobileMenu && (
@@ -59,11 +57,6 @@ export default function Header() {
                                         </li>
                                         <li>
                                             <a href="#contato" className="color-ebano" onClick={() => setShowMobileMenu(false)}>Contato</a>
-                                        </li>
-                                        <li>
-                                            <a className="color-ebano" href="#">
-                                                Login
-                                            </a>
                                         </li>
                                     </ul>
                                 </div>
