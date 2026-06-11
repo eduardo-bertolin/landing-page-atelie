@@ -43,7 +43,7 @@ export default function Header() {
                                 <div className="container flex flex-col items-center justify-center h-full relative">
                                     <ul className="flex flex-col gap-8 text-center text-2xl font-jost uppercase tracking-widest">
                                         <li>
-                                            <a href="#" className="color-ebano" onClick={() => setShowMobileMenu(false)}>Home</a>
+                                            <a href="#" className="color-ebano" onClick={() => setShowMobileMenu(false)}>Início</a>
 
                                         </li>
                                         <li>

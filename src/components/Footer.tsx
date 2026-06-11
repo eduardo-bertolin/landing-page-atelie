@@ -1,13 +1,13 @@
 import Logo from "./Logo";
-import { FaPhone, FaLocationDot, FaRegClock, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa6";
+import { FaPhone, FaLocationDot, FaClock, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa6";
 import { IoMdMail } from "react-icons/io";
 
 
 
 export default function Footer() {
     return (
-        <section id="footer" className="w-full h-auto py-20 flex">
-            <div className="grid grid-cols-2 lg:grid-cols-3 w-full mx-auto">
+        <section id="footer" className="w-full h-auto ">
+            <div className="grid grid-cols-2 lg:grid-cols-3 w-full mx-auto my-10">
                 <div className="flex flex-col w-full h-auto justify-start px-5 gap-4 col-span-2 lg:col-span-1 pb-8 lg:pb-0">
                     <Logo />
                     <p className="text-grafite font-jost text-lg max-w-md">
@@ -19,15 +19,15 @@ export default function Footer() {
                     <p className="text-md text-grafite uppercase font-semibold">Redes Sociais</p>
                     <a href="https://www.instagram.com/atelietatibertolin/" className="group flex flex-row items-center gap-2 cursor-pointer w-fit">
                         <FaInstagram className="w-4 h-4 text-grafite transition-colors group-hover:text-orange-500" />
-                        <span className="font-jost text-lg text-grafite transition-colors group-hover:text-orange-500">@atelietatibertolin</span>
+                        <span className="font-jost text-lg text-grafite transition-colors group-hover:text-orange-500 underline xl:no-underline">@atelietatibertolin</span>
                     </a>
                     <a href="https://www.facebook.com/atelietatibertolin/" className="group flex flex-row items-center gap-2 cursor-pointer w-fit">
                         <FaFacebook className="w-4 h-4 text-grafite transition-colors group-hover:text-blue-500" />
-                        <span className="font-jost text-lg text-grafite transition-colors group-hover:text-blue-500">/atelietatibertolin</span>
+                        <span className="font-jost text-lg text-grafite transition-colors group-hover:text-blue-500 underline xl:no-underline">/atelietatibertolin</span>
                     </a>
                     <a href="https://www.youtube.com/channel/UCZYuZOcvh9gY5lCuft8Thng" className="group flex flex-row items-center gap-2 cursor-pointer w-fit">
                         <FaYoutube className="w-4 h-4 text-grafite transition-colors group-hover:text-red-500" />
-                        <span className="font-jost text-lg text-grafite transition-colors group-hover:text-red-500">/atelietatibertolin</span>
+                        <span className="font-jost text-lg text-grafite transition-colors group-hover:text-red-500 underline xl:no-underline">/atelietatibertolin</span>
                     </a>
                 </div>
 
@@ -46,11 +46,14 @@ export default function Footer() {
                         <span className="text-grafite font-jost text-lg">Cascavel - PR</span>
                     </div>
                     <div className="flex flex-row items-center gap-2">
-                        <FaRegClock className="text-grafite w-4 h-4 " />
+                        <FaClock className="text-grafite w-5 h-5 xl:w-4 xl:h-4 " />
                         <span className="text-grafite font-jost text-lg">Segunda a Sexta - 08:00 às 18:00</span>
                     </div>
                 </div>
 
+            </div>
+            <div className="border-t-2 border-black/10 p-6 justify-center">
+                <p className="font-jost text-md text-grafite text-center w-full font-medium uppercase">© {new Date().getFullYear()} Ateliê Tati Bertolin. Todos os direitos reservados.</p>
             </div>
         </section>
     )
