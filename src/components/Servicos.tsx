@@ -1,9 +1,5 @@
-import Regua from "../assets/regua.svg";
-import Ajustes from "../assets/ajustes.svg";
-import Bolsa from "../assets/bolsa.svg";
-import Presente from "../assets/presente.svg";
-import Caminhao from "../assets/caminhao.svg";
-import Patchwork from "../assets/patchwork.svg";
+import { FaRuler, FaCut, FaShoppingBag, FaGift, FaTruck, } from "react-icons/fa";
+import { MdOutlineGrid4X4 } from "react-icons/md";
 import GridServicos from "./Grid-servicos";
 
 
@@ -21,12 +17,12 @@ export default function Servicos() {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-3 w-full h-auto">
-                    <GridServicos icon={Regua} title="Criação sob medida" description="Encomende exatamente o que você precisa. Trabalhamos com costura e patchwork em qualquer projeto — você define o modelo, o tecido, as cores e os detalhes, e nós executamos com precisão e acabamento profissional." />
-                    <GridServicos icon={Ajustes} title="Peças customizadas" description="Traga sua referência ou ideia e a gente concretiza. Escolha estampas, cores e materiais para uma peça com a sua cara — do início ao fim." />
-                    <GridServicos icon={Patchwork} title="Patchwork Artesanal" description="Técnica tradicional com resultado moderno. Criamos peças únicas combinando tecidos, texturas e cores com composição cuidadosa e acabamento impecável" />
-                    <GridServicos icon={Bolsa} title="Capas & Estojos" description="Proteção com estilo. Capas para notebook, tablet e livros, estojos e necessaires com estrutura pensada para o dia a dia e estética que combina com você." />
-                    <GridServicos icon={Presente} title="Kits Presenteáveis" description="A escolha certa para presentear. Kits coordenados e embalados, ideais para datas especiais, chás, madrinheiras e encomendas corporativas." />
-                    <GridServicos icon={Caminhao} title="Encomendas em Lote" description="Produções para revendas, eventos e empresas. Lotes personalizados com identidade visual da sua marca aplicada em cada peça, com prazo e qualidade garantidos." />
+                    <GridServicos icon={FaRuler} title="Criação sob medida" description="Encomende exatamente o que você precisa. Trabalhamos com costura e patchwork em qualquer projeto — você define o modelo, o tecido, as cores e os detalhes, e nós executamos com precisão e acabamento profissional." />
+                    <GridServicos icon={FaCut} title="Peças customizadas" description="Traga sua referência ou ideia e a gente concretiza. Escolha estampas, cores e materiais para uma peça com a sua cara — do início ao fim." />
+                    <GridServicos icon={MdOutlineGrid4X4} title="Patchwork Artesanal" description="Técnica tradicional com resultado moderno. Criamos peças únicas combinando tecidos, texturas e cores com composição cuidadosa e acabamento impecável" />
+                    <GridServicos icon={FaShoppingBag} title="Capas & Estojos" description="Proteção com estilo. Capas para notebook, tablet e livros, estojos e necessaires com estrutura pensada para o dia a dia e estética que combina com você." />
+                    <GridServicos icon={FaGift} title="Kits Presenteáveis" description="A escolha certa para presentear. Kits coordenados e embalados, ideais para datas especiais, chás, madrinheiras e encomendas corporativas." />
+                    <GridServicos icon={FaTruck} title="Encomendas em Lote" description="Produções para revendas, eventos e empresas. Lotes personalizados com identidade visual da sua marca aplicada em cada peça, com prazo e qualidade garantidos." />
                 </div>
             </div>
         </section>

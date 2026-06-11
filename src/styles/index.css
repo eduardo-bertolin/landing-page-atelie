@@ -161,16 +161,13 @@ main {
   padding-top: var(--nav-height);
 }
 
-a {
-  text-decoration: none;
-  color: var(--color-ebano);
-  font-weight: var(--fw-base);
-  @apply text-lg;
-}
-
-a:hover {
-  color: var(--color-terra);
-  cursor: pointer;
+@layer base {
+  a {
+    text-decoration: none;
+    color: var(--color-ebano);
+    font-weight: var(--fw-base);
+    @apply text-lg;
+  }
 }
 
 .line {

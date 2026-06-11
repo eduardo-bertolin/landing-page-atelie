@@ -21,7 +21,7 @@ export default function Sobre() {
                         <p className="font-cormorant font-semibold text-ebano text-xl">Acreditamos que uma peça feita à mão carrega consigo uma história, uma energia e um cuidado que a produção em massa não consegue replicar. Por isso, trabalhamos em pequena escala, garantindo que cada detalhe seja perfeito.</p>
                         <div className="flex flex-col gap-2">
                             <div className="bg-cru-border w-18 h-18 rounded-lg flex items-center justify-center">
-                                <img src={Maquina} alt="Máquina de costura" className="flex w-full h-full scale-180" />
+                                <img src={Maquina} alt="Máquina de costura" className="flex w-full h-full scale-70" />
                             </div>
                             <p className="text-sm font-jost font-bold text-ebano uppercase pt-3">Tatiana Bertolin - Fundadora e Artesã</p>
                         </div>

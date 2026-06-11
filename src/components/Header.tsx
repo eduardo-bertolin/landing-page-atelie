@@ -19,7 +19,7 @@ export default function Header() {
                     <div className="hidden xl:flex">
                         <ul className="flex gap-4">
                             <li>
-                                <a href="#sobre">Sobre</a>
+                                <a href="#sobre" className="hover:dourado">Sobre</a>
                             </li>
                             <li>
                                 <a href="#servicos">Serviços</a>

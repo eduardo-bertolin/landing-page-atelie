@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "./Button";
-import Whatsapp from "../assets/whatsapp.svg"
+import { FaWhatsapp } from "react-icons/fa";
+
 
 export default function Contato() {
     const [email, setEmail] = useState("");
@@ -103,16 +104,16 @@ export default function Contato() {
                 </form>
 
                 <div className="w-full max-w-2xl md:hidden mt-2">
-                    <a href="" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-3 bg-[#25D366] text-white font-jont font-bold uppercase tracking-wider py-4 hover:brightness-110 transition-all shadow-lg">
-                        <img src={Whatsapp} alt="WhatsApp" className="w-7 h-7 filter brightness-0 invert" />
-                        <span>Falar no WhatsApp</span>
+                    <a href="" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-3 bg-terra font-jont font-bold uppercase tracking-wider py-4 hover:brightness-110 transition-all shadow-lg">
+                        <FaWhatsapp size={28} className="text-green-500" />
+                        <span className="text-white">Falar no WhatsApp</span>
                     </a>
                 </div>
 
             </div>
             <div className="hidden md:block fixed md:bottom-10 md:right-4 z-50 hover:scale-110 transition-transform cursor-pointer hover:brightness-110">
                 <a href="" target="_blank" rel="noopener noreferrer">
-                    <img src={Whatsapp} alt="WhatsApp" className="w-20 h-20" />
+                    <FaWhatsapp className="w-20 h-20 text-dourado" />
                 </a>
             </div>
 

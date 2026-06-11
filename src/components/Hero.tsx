@@ -25,8 +25,8 @@ export default function Hero() {
               Costura artesanal para quem acredita em peças únicas.
             </p>
             <div className="flex flex-col xl:flex-row items-center gap-4">
-              <Button text="Ver peças" variant="secondary" />
-              <Button text="Ver coleções" variant="outline" />
+              <Button text="Ver peças" href="#portfolio" variant="secondary" />
+              <Button text="Ver coleções" href="#servicos" variant="outline" />
             </div>
           </div>
 

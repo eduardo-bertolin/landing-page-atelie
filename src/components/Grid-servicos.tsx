@@ -1,13 +1,15 @@
+import type { IconType } from "react-icons";
+
 interface GridServicosProps {
-    icon: string;
+    icon: IconType;
     title: string;
     description: string;
 }
 
-export default function GridServicos({ icon, title, description }: GridServicosProps) {
+export default function GridServicos({ icon: Icon, title, description }: GridServicosProps) {
     return (
         <div className="group border border-(--color-dourado) rounded-xs w-auto h-auto flex flex-col justify-start p-5 gap-4 transition-all duration-500 hover:bg-terra/40 hover:border-(--color-dourado)">
-            <img src={icon} alt={title} className="w-10 h-10 transition-transform duration-300 group-hover:-translate-x-4" />
+            <Icon className="w-10 h-10 text-dourado transition-transform duration-300 group-hover:-translate-x-4" />
             <h3 className="font-serif text-white text-3xl">{title}</h3>
             <p className="font-jost text-(--color-cru-translucent) leading-6 text-base">{description}</p>
         </div>
