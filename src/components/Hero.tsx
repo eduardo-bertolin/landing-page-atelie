@@ -26,7 +26,7 @@ export default function Hero() {
             </p>
             <div className="flex flex-col xl:flex-row items-center gap-4">
               <Button text="Ver peças" href="#portfolio" variant="secondary" />
-              <Button text="Ver coleções" href="#servicos" variant="outline" />
+              {/* <Button text="Ver coleções" href="#servicos" variant="outline" /> */}
             </div>
           </div>
 

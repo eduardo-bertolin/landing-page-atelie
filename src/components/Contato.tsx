@@ -1,45 +1,76 @@
-import { useState } from "react";
+import React, { useRef, useState } from "react";
 import Button from "./Button";
 import { FaWhatsapp } from "react-icons/fa";
-
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Contato() {
-    const [email, setEmail] = useState("");
+    const [formData, setFormData] = useState({ name: '', email: '' });
+    const [isChallengeCompleted, setChallengeCompleted] = useState(false);
+    const recaptchaRef = useRef<ReCAPTCHA>(null);
+
     const [message, setMessage] = useState("");
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
     const [feedbackMsg, setFeedbackMsg] = useState("");
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setStatus("loading");
-        setFeedbackMsg("");
+    function isNullOrEmpty(val: string) {
+        return val === null || val === undefined || val.trim() === '';
+    }
 
+    function isValidForm() {
+        const isValidFields = !isNullOrEmpty(formData.name)
+            && !isNullOrEmpty(formData.email);
+
+        return isValidFields && isChallengeCompleted;
+    }
+
+    async function handleSendEmail() {
+        setStatus("loading");
         try {
             const response = await fetch("/.netlify/functions/send-email", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email, message }),
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email: formData.email, message }),
             });
-
-            const data = await response.json();
-
             if (response.ok) {
                 setStatus("success");
-                setFeedbackMsg("Sua mensagem foi enviada com sucesso! Entraremos em contato em breve.");
-                setEmail("");
-                setMessage("");
+                setFeedbackMsg("Enviado com sucesso!");
             } else {
                 setStatus("error");
-                setFeedbackMsg(data.error || "Ocorreu um erro ao enviar a mensagem.");
             }
         } catch (error) {
-            console.error("Erro no envio do formulário:", error);
             setStatus("error");
-            setFeedbackMsg("Ocorreu um erro inesperado. Tente novamente mais tarde.");
         }
-    };
+    }
+
+    function resetFields() {
+        setFormData({ name: '', email: '' });
+        setMessage("");
+    }
+
+    async function handeleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        e.preventDefault();
+
+        if (!isValidForm()) {//Valida os campos com input
+            return;
+        }
+
+        setChallengeCompleted(false);
+
+        await handleSendEmail();
+
+        resetFields();
+        recaptchaRef.current?.reset();
+    }
+
+    function handleCompleteChallenge(token: string | null) {
+        if (!token) {
+            setChallengeCompleted(false);
+            return;
+        }
+
+        setChallengeCompleted(true);
+    }
+
 
     return (
         <section id="contato" className="relative w-full section-h flex flex-col items-center justify-center bg-ebano">
@@ -56,7 +87,7 @@ export default function Contato() {
                 </div>
 
                 <form
-                    onSubmit={handleSubmit}
+                    onSubmit={handeleSubmit}
                     className="w-full max-w-2xl bg-white p-8 xl:p-8 shadow-lg flex flex-col gap-3"
                 >
                     <div className="flex flex-col gap-2">
@@ -66,8 +97,8 @@ export default function Contato() {
                             id="email"
                             required
                             placeholder="exemplo@email.com"
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
+                            value={formData.email}
+                            onChange={(event) => setFormData({ ...formData, email: event.target.value })}
                             disabled={status === "loading"}
                             className="w-full p-4 border border-gray-300 focus:outline-none focus:border-terra transition-colors"
                         />
@@ -88,6 +119,14 @@ export default function Contato() {
 
                     </div>
 
+                    <div className="flex justify-center my-2">
+                        <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey="6LfXuBstAAAAACgxzmEIgH55TDjFY-ypxhazKz-E"
+                            onChange={handleCompleteChallenge}
+                        />
+                    </div>
+
                     <Button
                         type="submit"
                         variant="submit"
@@ -104,7 +143,7 @@ export default function Contato() {
                 </form>
 
                 <div className="w-full max-w-2xl md:hidden mt-2">
-                    <a href="" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-3 bg-terra font-jont font-bold uppercase tracking-wider py-4 hover:brightness-110 transition-all shadow-lg">
+                    <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-3 bg-terra font-jont font-bold uppercase tracking-wider py-4 hover:brightness-110 transition-all shadow-lg">
                         <FaWhatsapp size={28} className="text-green-500" />
                         <span className="text-white">Falar no WhatsApp</span>
                     </a>
@@ -112,7 +151,7 @@ export default function Contato() {
 
             </div>
             <div className="hidden md:block fixed md:bottom-10 md:right-4 z-50 hover:scale-110 transition-transform cursor-pointer hover:brightness-110">
-                <a href="" target="_blank" rel="noopener noreferrer">
+                <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer">
                     <FaWhatsapp className="w-20 h-20 text-dourado" />
                 </a>
             </div>

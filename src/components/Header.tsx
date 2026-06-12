@@ -19,16 +19,16 @@ export default function Header() {
                     <div className="hidden xl:flex">
                         <ul className="flex gap-4">
                             <li>
-                                <a href="#sobre" className="hover:dourado">Sobre</a>
+                                <a href="#sobre" className="hover:text-dourado transition-colors">Sobre</a>
                             </li>
                             <li>
-                                <a href="#servicos">Serviços</a>
+                                <a href="#servicos" className="hover:text-dourado transition-colors">Serviços</a>
                             </li>
                             <li>
-                                <a href="#portfolio">Portfólio</a>
+                                <a href="#portfolio" className="hover:text-dourado transition-colors">Portfólio</a>
                             </li>
                             <li>
-                                <a href="#contato">Contato</a>
+                                <a href="#contato" className="hover:text-dourado transition-colors">Contato</a>
                             </li>
                         </ul>
                     </div>

@@ -17,7 +17,7 @@ export default function Sobre() {
                     </div>
 
                     <div className="order-3 xl:col-start-2 xl:row-start-2 flex flex-col justify-center gap-12">
-                        <p className="font-cormorant font-semibold text-ebano text-xl">Fundada pela mestra artesã Clara Maison, nosso ateliê nasceu do desejo de resgatar a elegância da costura tradicional em um mundo de moda rápida. Cada peça que sai de nossas mãos é o resultado de horas de dedicação, escolha meticulosa de fios e um olhar atento à harmonia das formas.</p>
+                        <p className="font-cormorant font-semibold text-ebano text-xl">Fundada pela mestra artesã Tatiana Bertolin, o ateliê nasceu do desejo de resgatar a elegância da costura tradicional em um mundo de moda rápida. Cada peça que sai de nossas mãos é o resultado de horas de dedicação, escolha meticulosa de fios e um olhar atento à harmonia das formas.</p>
                         <p className="font-cormorant font-semibold text-ebano text-xl">Acreditamos que uma peça feita à mão carrega consigo uma história, uma energia e um cuidado que a produção em massa não consegue replicar. Por isso, trabalhamos em pequena escala, garantindo que cada detalhe seja perfeito.</p>
                         <div className="flex flex-col gap-2">
                             <div className="bg-cru-border w-18 h-18 rounded-lg flex items-center justify-center">

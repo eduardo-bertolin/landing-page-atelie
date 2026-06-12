@@ -20,16 +20,15 @@ export default function Portfolio() {
     const momentumFrameId = useRef<number | null>(null);
     const scrollPosRef = useRef(0);
 
-    // Representação dos seus cards. Adicione a imagem importada correspondente em cada objeto!
     const cards = [
-        { id: 1, titulo: "Produto 1", image: Prod1, alt: "Trabalho de Costura e acabamento" },
-        { id: 2, titulo: "Produto 2", image: Prod2, alt: "Confecção artesanal sob medida" },
-        { id: 3, titulo: "Produto 3", image: Prod3, alt: "Detalhes de costura criativa" },
-        { id: 4, titulo: "Produto 4", image: Prod4, alt: "Peças exclusivas e patchwork" },
-        { id: 5, titulo: "Produto 5", image: Prod5, alt: "Peças exclusivas e patchwork" },
+        { id: 1, titulo: "Bolsa Artesanal", image: Prod1, alt: "Trabalho de Costura e acabamento" },
+        { id: 2, titulo: "Bolsa Artesanal", image: Prod2, alt: "Confecção artesanal sob medida" },
+        { id: 3, titulo: "Bolsa Artesanal", image: Prod3, alt: "Detalhes de costura criativa" },
+        { id: 4, titulo: "Bolsa Artesanal", image: Prod4, alt: "Peças exclusivas e patchwork" },
+        { id: 5, titulo: "Bolsa Artesanal", image: Prod5, alt: "Peças exclusivas e patchwork" },
     ];
 
-    // Multiplicamos a lista 10 vezes para garantir que o carrossel nunca chegue aos limites físicos (o que causava o "travamento")
+    // Multiplica a lista 10 vezes para garantir que o carrossel funcione
     const duplicatedCards = Array(10).fill(cards).flat();
 
     const getSingleSetWidth = () => {
@@ -63,10 +62,10 @@ export default function Portfolio() {
         return () => clearTimeout(timer);
     }, []);
 
-    // 1. Loop Infinito: detecta quando o scroll passa dos limites e faz o salto imperceptível
+    // detecta quando o scroll passa dos limites e faz o salto imperceptível
     const handleScroll = () => {
         const container = containerRef.current;
-        if (!container || isDraggingRef.current) return; // Evita interferir no meio do arrasto físico do usuário
+        if (!container || isDraggingRef.current) return; // evita interferir no meio do arrasto físico do usuário
 
         const width = getSingleSetWidth();
         if (width === 0) return;

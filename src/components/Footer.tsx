@@ -35,11 +35,11 @@ export default function Footer() {
                     <p className="text-md text-grafite uppercase font-semibold">Atendimento</p>
                     <div className="flex flex-row items-center gap-2">
                         <FaPhone className="text-grafite w-4 h-4 " />
-                        <span className="text-grafite font-jost text-lg">(47) 99211-1591</span>
+                        <span className="text-grafite font-jost text-lg">(45) 98815-7023</span>
                     </div>
                     <div className="flex flex-row items-center gap-2">
                         <IoMdMail className="text-grafite w-4 h-4 " />
-                        <span className="text-grafite font-jost text-lg">email@gmail.com</span>
+                        <span className="text-grafite font-jost text-lg">atelietatibertolin@hotmail.com</span>
                     </div>
                     <div className="flex flex-row items-center gap-2">
                         <FaLocationDot className="text-grafite w-4 h-4 " />
@@ -53,7 +53,7 @@ export default function Footer() {
 
             </div>
             <div className="border-t-2 border-black/10 p-6 justify-center">
-                <p className="font-jost text-md text-grafite text-center w-full font-medium uppercase">© {new Date().getFullYear()} Ateliê Tati Bertolin. Todos os direitos reservados.</p>
+                <p className="font-jost text-md text-grafite/50 text-center w-full font-medium uppercase">© {new Date().getFullYear()} Ateliê Tati Bertolin. Todos os direitos reservados.</p>
             </div>
         </section>
     )
