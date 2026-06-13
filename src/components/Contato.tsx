@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import Button from "./Button";
 import { FaWhatsapp } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
-import { ToastContainer, toast } from "react-toastify";
+import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Contato() {
@@ -229,7 +229,19 @@ export default function Contato() {
             </div>
 
             {/* Importa os estilos padrões do React Toastify e o container para renderizar as notificações */}
-            <ToastContainer />
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover={false}
+                theme="light"
+                transition={Bounce}
+            />
         </section>
     );
 }
