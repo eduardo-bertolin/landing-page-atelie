@@ -17,9 +17,7 @@ export default function Contato() {
     }
 
     function isValidForm() {
-        const isValidFields = !isNullOrEmpty(email) && !isNullOrEmpty(message);
-
-        return isValidFields && isChallengeCompleted;
+        return !isNullOrEmpty(email) && !isNullOrEmpty(message);
     }
 
     async function handleSendEmail(): Promise<boolean> {
@@ -55,6 +53,12 @@ export default function Contato() {
         e.preventDefault();
 
         if (!isValidForm()) {
+            return;
+        }
+
+        if (!isChallengeCompleted) {
+            setStatus("error");
+            setFeedbackMsg("Por favor, complete o desafio reCAPTCHA antes de enviar.");
             return;
         }
 
