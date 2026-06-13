@@ -4,7 +4,7 @@ import { FaWhatsapp } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Contato() {
-    const [formData, setFormData] = useState({ name: '', email: '' });
+    const [email, setEmail] = useState("");
     const [isChallengeCompleted, setChallengeCompleted] = useState(false);
     const recaptchaRef = useRef<ReCAPTCHA>(null);
 
@@ -17,49 +17,56 @@ export default function Contato() {
     }
 
     function isValidForm() {
-        const isValidFields = !isNullOrEmpty(formData.name)
-            && !isNullOrEmpty(formData.email);
+        const isValidFields = !isNullOrEmpty(email) && !isNullOrEmpty(message);
 
         return isValidFields && isChallengeCompleted;
     }
 
-    async function handleSendEmail() {
+    async function handleSendEmail(): Promise<boolean> {
         setStatus("loading");
         try {
             const response = await fetch("/.netlify/functions/send-email", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email: formData.email, message }),
+                body: JSON.stringify({ email, message }),
             });
             if (response.ok) {
                 setStatus("success");
                 setFeedbackMsg("Enviado com sucesso!");
+                return true;
             } else {
                 setStatus("error");
+                setFeedbackMsg("Falha ao enviar o e-mail. Tente novamente.");
+                return false;
             }
         } catch (error) {
             setStatus("error");
+            setFeedbackMsg("Erro de conexão. Verifique sua rede e tente novamente.");
+            return false;
         }
     }
 
     function resetFields() {
-        setFormData({ name: '', email: '' });
+        setEmail("");
         setMessage("");
     }
 
     async function handeleSubmit(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
 
-        if (!isValidForm()) {//Valida os campos com input
+        if (!isValidForm()) {
             return;
         }
 
+        setFeedbackMsg("");
         setChallengeCompleted(false);
 
-        await handleSendEmail();
+        const success = await handleSendEmail();
 
-        resetFields();
-        recaptchaRef.current?.reset();
+        if (success) {
+            resetFields();
+            recaptchaRef.current?.reset();
+        }
     }
 
     function handleCompleteChallenge(token: string | null) {
@@ -97,8 +104,8 @@ export default function Contato() {
                             id="email"
                             required
                             placeholder="exemplo@email.com"
-                            value={formData.email}
-                            onChange={(event) => setFormData({ ...formData, email: event.target.value })}
+                            value={email}
+                            onChange={(event) => setEmail(event.target.value)}
                             disabled={status === "loading"}
                             className="w-full p-4 border border-gray-300 focus:outline-none focus:border-terra transition-colors"
                         />

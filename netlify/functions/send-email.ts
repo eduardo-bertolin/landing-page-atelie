@@ -10,11 +10,14 @@ interface ContactPayload {
 
 const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "";
 
-const corsHeaders = (origin: string) => ({
-    "Access-Control-Allow-Origin": ALLOWED_ORIGIN || origin,
-    "Access-Control-Allow-Headers": "Content-Type",
-    "Access-Control-Allow-Methods": "POST, OPTIONS",
-});
+const corsHeaders = (origin: string) => {
+    const isLocal = origin.includes("localhost") || origin.includes("127.0.0.1");
+    return {
+        "Access-Control-Allow-Origin": isLocal ? origin : (ALLOWED_ORIGIN || origin),
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+    };
+};
 
 
 
