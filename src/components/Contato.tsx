@@ -2,25 +2,27 @@ import React, { useRef, useState } from "react";
 import Button from "./Button";
 import { FaWhatsapp } from "react-icons/fa";
 import ReCAPTCHA from "react-google-recaptcha";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Contato() {
     // ---- ESTADOS (States) ----
-    
+
     // Estado para armazenar o email digitado pelo usuário
     const [email, setEmail] = useState("");
-    
+
     // Estado para verificar se o usuário completou o desafio do reCAPTCHA
     const [isChallengeCompleted, setChallengeCompleted] = useState(false);
-    
+
     // Referência (Ref) usada para interagir diretamente com o componente do ReCAPTCHA (ex: resetá-lo)
     const recaptchaRef = useRef<ReCAPTCHA>(null);
 
     // Estado para armazenar o texto da mensagem
     const [message, setMessage] = useState("");
-    
+
     // Estado para monitorar o status do envio do formulário (ocioso, carregando, sucesso ou erro)
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-    
+
     // Estado para controlar o texto de feedback (mensagens de erro ou sucesso) exibido na tela
     const [feedbackMsg, setFeedbackMsg] = useState("");
 
@@ -49,22 +51,28 @@ export default function Contato() {
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ email, message }),
             });
-            
+
             // Se a resposta do servidor for 200-299 (ok), atualiza para sucesso
             if (response.ok) {
                 setStatus("success");
-                setFeedbackMsg("Enviado com sucesso!");
+                toast.success("E-mail enviado com sucesso!", {
+                    className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
+                });
                 return true;
             } else {
                 // Caso contrário (ex: erro no servidor SMTP), atualiza para erro
                 setStatus("error");
-                setFeedbackMsg("Falha ao enviar o e-mail. Tente novamente.");
+                toast.error("Falha ao enviar o e-mail. Tente novamente.", {
+                    className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
+                });
                 return false;
             }
         } catch (error) {
             // Captura erros de rede ou conexão
             setStatus("error");
-            setFeedbackMsg("Erro de conexão. Verifique sua rede e tente novamente.");
+            toast.error("Erro de conexão. Verifique sua rede e tente novamente.", {
+                className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
+            });
             return false;
         }
     }
@@ -90,7 +98,9 @@ export default function Contato() {
         // 2. Valida se o usuário resolveu o reCAPTCHA
         if (!isChallengeCompleted) {
             setStatus("error");
-            setFeedbackMsg("Por favor, complete o reCAPTCHA antes de enviar.");
+            toast.warning("Por favor, complete o reCAPTCHA antes de enviar.", {
+                className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
+            });
             return;
         }
 
@@ -127,7 +137,7 @@ export default function Contato() {
     return (
         <section id="contato" className="relative w-full section-h flex flex-col items-center justify-center bg-ebano">
             <div className="container flex flex-col items-center gap-10 w-full px-5 py-10 xl:py-0">
-                
+
                 {/* Títulos da seção de Contato */}
                 <div className="flex flex-col items-center text-center gap-4">
                     <span className="font-jont font-bold text-sm text-terra tracking-[0.375rem] uppercase">Fale Conosco</span>
@@ -210,7 +220,7 @@ export default function Contato() {
                 </div>
 
             </div>
-            
+
             {/* Ícone flutuante de WhatsApp fixo no canto inferior direito para telas Desktop (MD para cima) */}
             <div className="hidden md:block fixed md:bottom-10 md:right-4 z-50 hover:scale-110 transition-transform cursor-pointer hover:brightness-110">
                 <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer">
@@ -218,6 +228,8 @@ export default function Contato() {
                 </a>
             </div>
 
+            {/* Importa os estilos padrões do React Toastify e o container para renderizar as notificações */}
+            <ToastContainer />
         </section>
     );
 }
