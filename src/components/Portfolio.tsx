@@ -1,9 +1,20 @@
 import { useEffect, useRef, useState } from "react";
-import Prod1 from "../assets/images/prod1.jpeg";
-import Prod2 from "../assets/images/prod2.jpeg";
-import Prod3 from "../assets/images/prod3.jpeg";
-import Prod4 from "../assets/images/prod4.jpeg";
-import Prod5 from "../assets/images/prod5.jpeg";
+import Prod1 from "../assets/images/bolsa_terra.jpeg";
+import Prod2 from "../assets/images/bolsa_terra2.jpeg";
+import Prod3 from "../assets/images/bolsa_terra3.jpeg";
+import Prod4 from "../assets/images/bolsa_terra4.jpeg";
+import Prod5 from "../assets/images/bolsa_terra5.jpeg";
+import Prod6 from "../assets/images/camiseta_logo.jpeg";
+import Prod7 from "../assets/images/bolsa_azul.jpeg";
+import Prod8 from "../assets/images/bolsa_azul2.jpeg";
+import Prod9 from "../assets/images/bolsa_azul3.jpeg";
+import Prod10 from "../assets/images/bolsa_azul4.jpeg";
+import Prod11 from "../assets/images/bolsa_azul5.jpeg";
+import Prod12 from "../assets/images/bolsa_azul6.jpeg";
+import Prod13 from "../assets/images/saia_festaj.jpeg";
+import Prod14 from "../assets/images/saia_festaj2.jpeg";
+import Prod15 from "../assets/images/saia_festaj3.jpeg";
+import Prod16 from "../assets/images/saia_festaj4.jpeg";
 
 
 export default function Portfolio() {
@@ -21,11 +32,22 @@ export default function Portfolio() {
     const scrollPosRef = useRef(0);
 
     const cards = [
-        { id: 1, titulo: "Bolsa Artesanal", image: Prod1, alt: "Trabalho de Costura e acabamento" },
-        { id: 2, titulo: "Bolsa Artesanal", image: Prod2, alt: "Confecção artesanal sob medida" },
-        { id: 3, titulo: "Bolsa Artesanal", image: Prod3, alt: "Detalhes de costura criativa" },
-        { id: 4, titulo: "Bolsa Artesanal", image: Prod4, alt: "Peças exclusivas e patchwork" },
-        { id: 5, titulo: "Bolsa Artesanal", image: Prod5, alt: "Peças exclusivas e patchwork" },
+        { id: 1, titulo: "Bolsa transversal terra", image: Prod1, alt: "Bolsa transversal terra" },
+        { id: 2, titulo: "Bolsa transversal terra", image: Prod2, alt: "Bolsa transversal terra" },
+        { id: 3, titulo: "Bolsa transversal terra", image: Prod3, alt: "Bolsa transversal terra" },
+        { id: 4, titulo: "Bolsa transversal terra", image: Prod4, alt: "Bolsa transversal terra" },
+        { id: 5, titulo: "Bolsa transversal terra", image: Prod5, alt: "Bolsa transversal terra" },
+        { id: 6, titulo: "Logo bordado", image: Prod6, alt: "Camiseta com logo costurada" },
+        { id: 7, titulo: "Bolsa transversal azul", image: Prod7, alt: "Bolsa transversal azul" },
+        { id: 8, titulo: "Bolsa transversal azul", image: Prod8, alt: "Bolsa transversal azul" },
+        { id: 9, titulo: "Bolsa transversal azul", image: Prod9, alt: "Bolsa transversal azul" },
+        { id: 10, titulo: "Bolsa transversal azul", image: Prod10, alt: "Bolsa transversal azul" },
+        { id: 11, titulo: "Bolsa transversal azul", image: Prod11, alt: "Bolsa transversal azul" },
+        { id: 12, titulo: "Bolsa transversal azul", image: Prod12, alt: "Bolsa transversal azul" },
+        { id: 13, titulo: "Saia colorida festa junina", image: Prod13, alt: "Saia colorida festa junina" },
+        { id: 14, titulo: "Saia colorida festa junina", image: Prod14, alt: "Saia colorida festa junina" },
+        { id: 15, titulo: "Saia colorida festa junina", image: Prod15, alt: "Saia colorida festa junina" },
+        { id: 16, titulo: "Saia colorida festa junina", image: Prod16, alt: "Saia colorida festa junina" },
     ];
 
     // Multiplica a lista 10 vezes para garantir que o carrossel funcione
