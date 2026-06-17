@@ -43,6 +43,10 @@ const handler: Handler = async (event: HandlerEvent) => {
     }
 
     //transforma o json em objeto
+<<<<<<< HEAD
+=======
+
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
     let payload: ContactPayload;
 
     try {

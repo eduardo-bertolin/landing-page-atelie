@@ -6,32 +6,48 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Contato() {
-    // ---- ESTADOS (States) ----
+    // states
 
     const [email, setEmail] = useState("");
 
+<<<<<<< HEAD
     const [message, setMessage] = useState("");
 
     const [isChallengeCompleted, setChallengeCompleted] = useState(false);
 
     const recaptchaRef = useRef<ReCAPTCHA>(null);
 
+=======
+    const [isChallengeCompleted, setChallengeCompleted] = useState(false);
+
+    const recaptchaRef = useRef<ReCAPTCHA>(null);
+
+    const [message, setMessage] = useState("");
+
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
     const [feedbackMsg, setFeedbackMsg] = useState("");
 
-    // ---- FUNÇÕES AUXILIARES E DE VALIDAÇÃO ----
+    // validacao
 
+<<<<<<< HEAD
     // verifica se nulo ou vazio
 
     function isNullOrEmpty(val: string) {
         return val === null || val === undefined || val.trim() === '';
     }
+=======
+    function isNullOrEmpty(val: string) {
+        return val === null || val === undefined || val.trim() === '';
+    }
+
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
     function isValidForm() {
         return !isNullOrEmpty(email) && !isNullOrEmpty(message);
     }
 
-    // ---- REQUISIÇÃO HTTP (Envio do E-mail) ----
+    // requisicao http
 
     // envia os dados do formulário 
     async function handleSendEmail(): Promise<boolean> {
@@ -49,7 +65,11 @@ export default function Contato() {
                     className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
                 });
                 return true;
+<<<<<<< HEAD
             } else
+=======
+            } else {
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
                 setStatus("error");
             toast.error("Falha ao enviar o e-mail. Tente novamente.", {
                 className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
@@ -57,7 +77,6 @@ export default function Contato() {
             return false;
 
         } catch (error) {
-            // Captura erros de rede ou conexão
             setStatus("error");
             toast.error("Erro de conexão. Verifique sua rede e tente novamente.", {
                 className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
@@ -71,10 +90,17 @@ export default function Contato() {
         setMessage("");
     }
 
+<<<<<<< HEAD
     //funcao de submit
 
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         //nao recarrega a pagina
+=======
+    // forms
+
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+        // impede recarregar a página
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
         e.preventDefault();
 
         if (!isValidForm()) {
@@ -89,10 +115,17 @@ export default function Contato() {
             return;
         }
 
+<<<<<<< HEAD
         setFeedbackMsg("");
         setChallengeCompleted(false);
 
         //espera resposta
+=======
+        // limpa
+        setFeedbackMsg("");
+        setChallengeCompleted(false);
+
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
         const success = await handleSendEmail();
 
         if (success) {
@@ -104,12 +137,20 @@ export default function Contato() {
     // ---- RECAPTCHA ----
 
     function handleCompleteChallenge(token: string | null) {
+<<<<<<< HEAD
 
+=======
+        // se não houver token
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
         if (!token) {
             setChallengeCompleted(false);
             return;
         }
 
+<<<<<<< HEAD
+=======
+        // se houver token
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
         setChallengeCompleted(true);
     }
 
@@ -128,11 +169,19 @@ export default function Contato() {
                     </p>
                 </div>
 
+<<<<<<< HEAD
                 {/* formulário*/}
+=======
+                {/* forms */}
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
                 <form
                     onSubmit={handleSubmit}
                     className="w-full max-w-2xl bg-white p-8 xl:p-8 shadow-lg flex flex-col gap-3"
                 >
+<<<<<<< HEAD
+=======
+                    {/* e-mail */}
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
                     <div className="flex flex-col gap-2">
                         <label htmlFor="email" className="font-serif text-ebano text-lg">Seu E-mail</label>
                         <input
@@ -147,6 +196,10 @@ export default function Contato() {
                         />
                     </div>
 
+<<<<<<< HEAD
+=======
+                    {/* mensagem */}
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
                     <div className="flex flex-col gap-2">
                         <label htmlFor="message" className="font-serif text-ebano text-lg">Sua Mensagem</label>
                         <textarea
@@ -161,7 +214,11 @@ export default function Contato() {
                         ></textarea>
                     </div>
 
+<<<<<<< HEAD
 
+=======
+                    {/* google reCAPTCHA */}
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
                     <div className="flex justify-center my-2">
                         <ReCAPTCHA
                             ref={recaptchaRef}
@@ -170,6 +227,10 @@ export default function Contato() {
                         />
                     </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
                     <Button
                         type="submit"
                         variant="submit"
@@ -188,15 +249,19 @@ export default function Contato() {
 
                 {/* botao whatsapp mobile */}
                 <div className="w-full max-w-2xl md:hidden mt-2">
-                    <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-3 bg-terra font-jont font-bold uppercase tracking-wider py-4 hover:brightness-110 transition-all shadow-lg">
+                    <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-3 bg-terra font-jont font-semibold uppercase tracking-wider py-4 hover:brightness-110 transition-all shadow-lg ">
                         <FaWhatsapp size={28} className="text-green-500" />
-                        <span className="text-white">Falar no WhatsApp</span>
+                        <span className="text-white ">Falar no WhatsApp</span>
                     </a>
                 </div>
 
             </div>
 
+<<<<<<< HEAD
             {/* icone fixo whatsapp dekstop */}
+=======
+            {/* botao whats pra tela menor */}
+>>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
             <div className="hidden md:block fixed md:bottom-10 md:right-4 z-50 hover:scale-110 transition-transform cursor-pointer hover:brightness-110">
                 <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer">
                     <FaWhatsapp className="w-20 h-20 text-dourado" />
