@@ -42,9 +42,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
-    //transforma o body em json
-
-    //
+    //transforma o json em objeto
     let payload: ContactPayload;
 
     try {
@@ -77,7 +75,7 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
-    //transporte de email
+    //transporte de email smtp
 
     const transporter = nodemailer.createTransport({
         host: process.env.SMTP_HOST,

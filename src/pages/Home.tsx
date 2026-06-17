@@ -8,7 +8,6 @@ import Portfolio from "../components/Portfolio";
 import Avaliacoes from "../components/Avaliacoes";
 import Contato from "../components/Contato";
 import Footer from "../components/Footer";
-
 export default function Home() {
   return (
     <>

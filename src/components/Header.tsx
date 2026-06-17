@@ -2,12 +2,27 @@ import Button from "../components/Button";
 import MenuIcon from "../assets/menu.svg";
 import CloseIcon from "../assets/close.svg";
 import Logo from "./Logo";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
 export default function Header() {
     const [showMobileMenu, setShowMobileMenu] = useState(false);
+
+    useEffect(() => {
+        if (showMobileMenu) {
+            document.documentElement.style.overflow = "hidden";
+            document.body.style.overflow = "hidden";
+        } else {
+            document.documentElement.style.overflow = "";
+            document.body.style.overflow = "";
+        }
+
+        return () => {
+            document.documentElement.style.overflow = "";
+            document.body.style.overflow = "";
+        };
+    }, [showMobileMenu]);
 
     return (
         <header>
