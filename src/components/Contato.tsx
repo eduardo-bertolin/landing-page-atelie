@@ -72,17 +72,14 @@ export default function Contato() {
 
     // forms
 
-    // Função principal disparada quando o usuário clica no botão de enviar
     async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        // Impede o comportamento padrão do HTML de recarregar a página ao enviar o formulário
+        // impede recarregar a página
         e.preventDefault();
 
-        // 1. Valida se os campos de texto (email e mensagem) foram digitados
         if (!isValidForm()) {
             return;
         }
 
-        // 2. Valida se o usuário resolveu o reCAPTCHA
         if (!isChallengeCompleted) {
             setStatus("error");
             toast.warning("Por favor, complete o reCAPTCHA antes de enviar.", {
@@ -91,11 +88,10 @@ export default function Contato() {
             return;
         }
 
-        // Limpa mensagens anteriores e redefine o estado do captcha
+        // limpa
         setFeedbackMsg("");
         setChallengeCompleted(false);
 
-        // 3. Executa a função de envio e aguarda (await) o resultado boolean
         const success = await handleSendEmail();
 
         // 4. Se o e-mail foi enviado com sucesso, limpa os campos e reseta visualmente o reCAPTCHA
@@ -137,12 +133,12 @@ export default function Contato() {
                     </p>
                 </div>
 
-                {/* Formulário de Contato */}
+                {/* forms */}
                 <form
                     onSubmit={handleSubmit}
                     className="w-full max-w-2xl bg-white p-8 xl:p-8 shadow-lg flex flex-col gap-3"
                 >
-                    {/* Campo: E-mail */}
+                    {/* e-mail */}
                     <div className="flex flex-col gap-2">
                         <label htmlFor="email" className="font-serif text-ebano text-lg">Seu E-mail</label>
                         <input
@@ -157,7 +153,7 @@ export default function Contato() {
                         />
                     </div>
 
-                    {/* Campo: Mensagem */}
+                    {/* mensagem */}
                     <div className="flex flex-col gap-2">
                         <label htmlFor="message" className="font-serif text-ebano text-lg">Sua Mensagem</label>
                         <textarea
@@ -172,7 +168,7 @@ export default function Contato() {
                         ></textarea>
                     </div>
 
-                    {/* Componente Google reCAPTCHA */}
+                    {/* google reCAPTCHA */}
                     <div className="flex justify-center my-2">
                         <ReCAPTCHA
                             ref={recaptchaRef} // Conecta a ref local ao widget
@@ -181,7 +177,7 @@ export default function Contato() {
                         />
                     </div>
 
-                    {/* Botão de Envio (Componente Customizado) */}
+
                     <Button
                         type="submit"
                         variant="submit"
@@ -200,15 +196,15 @@ export default function Contato() {
 
                 {/* Botão de WhatsApp exclusivo para telas Mobile (MD oculto) */}
                 <div className="w-full max-w-2xl md:hidden mt-2">
-                    <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-3 bg-terra font-jont font-bold uppercase tracking-wider py-4 hover:brightness-110 transition-all shadow-lg">
+                    <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-3 bg-terra font-jont font-semibold uppercase tracking-wider py-4 hover:brightness-110 transition-all shadow-lg ">
                         <FaWhatsapp size={28} className="text-green-500" />
-                        <span className="text-white">Falar no WhatsApp</span>
+                        <span className="text-white ">Falar no WhatsApp</span>
                     </a>
                 </div>
 
             </div>
 
-            {/* Ícone flutuante de WhatsApp fixo no canto inferior direito para telas Desktop (MD para cima) */}
+            {/* botao whats pra tela menor */}
             <div className="hidden md:block fixed md:bottom-10 md:right-4 z-50 hover:scale-110 transition-transform cursor-pointer hover:brightness-110">
                 <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer">
                     <FaWhatsapp className="w-20 h-20 text-dourado" />
