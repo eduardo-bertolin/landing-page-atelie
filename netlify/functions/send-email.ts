@@ -42,9 +42,8 @@ const handler: Handler = async (event: HandlerEvent) => {
         };
     }
 
-    //transforma o body em json
+    //transforma o json em objeto
 
-    //
     let payload: ContactPayload;
 
     try {

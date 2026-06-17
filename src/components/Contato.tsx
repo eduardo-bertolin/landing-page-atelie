@@ -6,43 +6,34 @@ import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Contato() {
-    // ---- ESTADOS (States) ----
+    // states
 
-    // Estado para armazenar o email digitado pelo usuário
     const [email, setEmail] = useState("");
 
-    // Estado para verificar se o usuário completou o desafio do reCAPTCHA
     const [isChallengeCompleted, setChallengeCompleted] = useState(false);
 
-    // Referência (Ref) usada para interagir diretamente com o componente do ReCAPTCHA (ex: resetá-lo)
     const recaptchaRef = useRef<ReCAPTCHA>(null);
 
-    // Estado para armazenar o texto da mensagem
     const [message, setMessage] = useState("");
 
-    // Estado para monitorar o status do envio do formulário (ocioso, carregando, sucesso ou erro)
     const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-    // Estado para controlar o texto de feedback (mensagens de erro ou sucesso) exibido na tela
     const [feedbackMsg, setFeedbackMsg] = useState("");
 
-    // ---- FUNÇÕES AUXILIARES E DE VALIDAÇÃO ----
+    // validacao
 
-    // Função utilitária para verificar se um campo de texto está nulo, indefinido ou vazio (apenas espaços)
     function isNullOrEmpty(val: string) {
         return val === null || val === undefined || val.trim() === '';
     }
 
-    // Função que valida se todos os campos obrigatórios do formulário foram preenchidos
     function isValidForm() {
         return !isNullOrEmpty(email) && !isNullOrEmpty(message);
     }
 
-    // ---- REQUISIÇÃO HTTP (Envio do E-mail) ----
+    // requisicao http
 
     // Função assíncrona que envia os dados do formulário para a Serverless Function do Netlify
     async function handleSendEmail(): Promise<boolean> {
-        // Altera o status para 'loading' para desabilitar botões/inputs e mostrar indicador de carregamento
         setStatus("loading");
         try {
             // Faz uma requisição POST para a rota da nossa função backend na Netlify
@@ -52,7 +43,6 @@ export default function Contato() {
                 body: JSON.stringify({ email, message }),
             });
 
-            // Se a resposta do servidor for 200-299 (ok), atualiza para sucesso
             if (response.ok) {
                 setStatus("success");
                 toast.success("E-mail enviado com sucesso!", {
@@ -60,7 +50,6 @@ export default function Contato() {
                 });
                 return true;
             } else {
-                // Caso contrário (ex: erro no servidor SMTP), atualiza para erro
                 setStatus("error");
                 toast.error("Falha ao enviar o e-mail. Tente novamente.", {
                     className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
@@ -68,7 +57,6 @@ export default function Contato() {
                 return false;
             }
         } catch (error) {
-            // Captura erros de rede ou conexão
             setStatus("error");
             toast.error("Erro de conexão. Verifique sua rede e tente novamente.", {
                 className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
@@ -77,16 +65,15 @@ export default function Contato() {
         }
     }
 
-    // Função para limpar os campos de input do formulário após o sucesso
     function resetFields() {
         setEmail("");
         setMessage("");
     }
 
-    // ---- MANIPULADOR DE SUBMIT (Formulário) ----
+    // forms
 
     // Função principal disparada quando o usuário clica no botão de enviar
-    async function handeleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
         // Impede o comportamento padrão do HTML de recarregar a página ao enviar o formulário
         e.preventDefault();
 
@@ -122,13 +109,13 @@ export default function Contato() {
 
     // Função disparada automaticamente quando o reCAPTCHA é resolvido pelo usuário
     function handleCompleteChallenge(token: string | null) {
-        // Se não houver token, significa que o desafio expirou ou falhou
+        // se não houver token
         if (!token) {
             setChallengeCompleted(false);
             return;
         }
 
-        // Se houver token, o desafio foi superado com sucesso
+        // se houver token
         setChallengeCompleted(true);
     }
 
@@ -152,7 +139,7 @@ export default function Contato() {
 
                 {/* Formulário de Contato */}
                 <form
-                    onSubmit={handeleSubmit}
+                    onSubmit={handleSubmit}
                     className="w-full max-w-2xl bg-white p-8 xl:p-8 shadow-lg flex flex-col gap-3"
                 >
                     {/* Campo: E-mail */}
