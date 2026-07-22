@@ -18,7 +18,7 @@ export default function Contato() {
   const isNullOrEmpty = (val: string) => !val || val.trim() === "";
   const isValidForm = () => !isNullOrEmpty(email) && !isNullOrEmpty(message);
 
-  const toastStyle = "!bg-[color:var(--color-cream)] !text-[color:var(--color-ink)] !border !border-[color:var(--color-border)] !rounded-2xl !shadow-2xl !font-sans";
+  const toastStyle = "!bg-[color:var(--color-cream)] !text-[color:var(--color-ink)] !border !border-[color:var(--color-border)] !rounded-none !overflow-hidden !shadow-2xl !font-sans";
 
   async function handleSendEmail(): Promise<boolean> {
     setStatus("loading");
