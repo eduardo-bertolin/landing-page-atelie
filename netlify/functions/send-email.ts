@@ -8,12 +8,20 @@ interface ContactPayload {
 
 //cfg cors
 
-const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "";
+const ALLOWED_ORIGIN = process.env.ALLOWED_ORIGIN ?? "https://atelietatibertolin.netlify.app";
 
 const corsHeaders = (origin: string) => {
-    const isLocal = origin.includes("localhost") || origin.includes("127.0.0.1");
+    const allowedList = ALLOWED_ORIGIN.split(",").map((s) => s.trim().replace(/\/$/, ""));
+    const normalizedOrigin = origin.replace(/\/$/, "");
+
+    const isAllowed =
+        origin.includes("localhost") ||
+        origin.includes("127.0.0.1") ||
+        allowedList.includes(normalizedOrigin) ||
+        normalizedOrigin.endsWith(".netlify.app");
+
     return {
-        "Access-Control-Allow-Origin": isLocal ? origin : (ALLOWED_ORIGIN || origin),
+        "Access-Control-Allow-Origin": isAllowed ? origin : (allowedList[0] || origin),
         "Access-Control-Allow-Headers": "Content-Type",
         "Access-Control-Allow-Methods": "POST, OPTIONS",
     };
