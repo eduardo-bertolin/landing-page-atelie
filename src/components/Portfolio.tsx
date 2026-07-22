@@ -1,303 +1,277 @@
 import { useEffect, useRef, useState } from "react";
-import Prod1 from "../assets/images/bolsa_terra.jpeg";
-import Prod2 from "../assets/images/bolsa_terra2.jpeg";
-import Prod3 from "../assets/images/bolsa_terra3.jpeg";
-import Prod4 from "../assets/images/bolsa_terra4.jpeg";
-import Prod5 from "../assets/images/bolsa_terra5.jpeg";
-import Prod6 from "../assets/images/camiseta_logo.jpeg";
-import Prod7 from "../assets/images/bolsa_azul.jpeg";
-import Prod8 from "../assets/images/bolsa_azul2.jpeg";
-import Prod9 from "../assets/images/bolsa_azul3.jpeg";
-import Prod10 from "../assets/images/bolsa_azul4.jpeg";
-import Prod11 from "../assets/images/bolsa_azul5.jpeg";
-import Prod12 from "../assets/images/bolsa_azul6.jpeg";
-import Prod13 from "../assets/images/saia_festaj.jpeg";
-import Prod14 from "../assets/images/saia_festaj2.jpeg";
-import Prod15 from "../assets/images/saia_festaj3.jpeg";
-import Prod16 from "../assets/images/saia_festaj4.jpeg";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaXmark, FaArrowLeft, FaArrowRight } from "react-icons/fa6";
 
+import Prod1 from "../assets/images/bolsa_terra.webp";
+import Prod2 from "../assets/images/bolsa_terra2.webp";
+import Prod3 from "../assets/images/bolsa_terra3.webp";
+import Prod4 from "../assets/images/bolsa_terra4.webp";
+import Prod5 from "../assets/images/bolsa_terra5.webp";
+import Prod6 from "../assets/images/camiseta_logo.webp";
+import Prod7 from "../assets/images/bolsa_azul.webp";
+import Prod8 from "../assets/images/bolsa_azul2.webp";
+import Prod9 from "../assets/images/bolsa_azul3.webp";
+import Prod10 from "../assets/images/bolsa_azul4.webp";
+import Prod11 from "../assets/images/bolsa_azul5.webp";
+import Prod12 from "../assets/images/bolsa_azul6.webp";
+import Prod13 from "../assets/images/saia_festaj.webp";
+import Prod14 from "../assets/images/saia_festaj2.webp";
+import Prod15 from "../assets/images/saia_festaj3.webp";
+import Prod16 from "../assets/images/saia_festaj4.webp";
+
+type Card = {
+  id: number;
+  titulo: string;
+  categoria: string;
+  image: string;
+  alt: string;
+};
+
+const CARDS: Card[] = [
+  { id: 1, titulo: "Bolsa transversal terra", categoria: "Bolsas", image: Prod1, alt: "Bolsa transversal terra" },
+  { id: 2, titulo: "Detalhe em patchwork", categoria: "Bolsas", image: Prod2, alt: "Bolsa transversal terra" },
+  { id: 3, titulo: "Alça e acabamento", categoria: "Bolsas", image: Prod3, alt: "Bolsa transversal terra" },
+  { id: 4, titulo: "Composição de tecidos", categoria: "Bolsas", image: Prod4, alt: "Bolsa transversal terra" },
+  { id: 5, titulo: "Bolsa terra — costas", categoria: "Bolsas", image: Prod5, alt: "Bolsa transversal terra" },
+  { id: 6, titulo: "Logo bordado à mão", categoria: "Bordados", image: Prod6, alt: "Camiseta com logo costurado" },
+  { id: 7, titulo: "Bolsa transversal azul", categoria: "Bolsas", image: Prod7, alt: "Bolsa transversal azul" },
+  { id: 8, titulo: "Detalhes em tecido", categoria: "Bolsas", image: Prod8, alt: "Bolsa transversal azul" },
+  { id: 9, titulo: "Bolso frontal", categoria: "Bolsas", image: Prod9, alt: "Bolsa transversal azul" },
+  { id: 10, titulo: "Fecho artesanal", categoria: "Bolsas", image: Prod10, alt: "Bolsa transversal azul" },
+  { id: 11, titulo: "Costura reforçada", categoria: "Bolsas", image: Prod11, alt: "Bolsa transversal azul" },
+  { id: 12, titulo: "Bolsa azul finalizada", categoria: "Bolsas", image: Prod12, alt: "Bolsa transversal azul" },
+  { id: 13, titulo: "Saia colorida festa junina", categoria: "Vestuário", image: Prod13, alt: "Saia colorida festa junina" },
+  { id: 14, titulo: "Estampas tradicionais", categoria: "Vestuário", image: Prod14, alt: "Saia colorida festa junina" },
+  { id: 15, titulo: "Composição de babados", categoria: "Vestuário", image: Prod15, alt: "Saia colorida festa junina" },
+  { id: 16, titulo: "Peça finalizada", categoria: "Vestuário", image: Prod16, alt: "Saia colorida festa junina" },
+];
 
 export default function Portfolio() {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const [, setIsDragging] = useState(false);
-    const [startX, setStartX] = useState(0);
-    const [scrollLeftState, setScrollLeftState] = useState(0);
-    const [isHovered, setIsHovered] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const startX = useRef(0);
+  const startScroll = useRef(0);
+  const isHovered = useRef(false);
+  const rafId = useRef<number | null>(null);
 
-    // Refs para o cálculo de inércia (momentum)
-    const isDraggingRef = useRef(false);
-    const lastXRef = useRef(0);
-    const velocityRef = useRef(0);
-    const momentumFrameId = useRef<number | null>(null);
-    const scrollPosRef = useRef(0);
+  // Auto-scroll (marquee-like)
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    let last = performance.now();
+    let half = el.scrollWidth / 2;
 
-    const cards = [
-        { id: 1, titulo: "Bolsa transversal terra", image: Prod1, alt: "Bolsa transversal terra" },
-        { id: 2, titulo: "Bolsa transversal terra", image: Prod2, alt: "Bolsa transversal terra" },
-        { id: 3, titulo: "Bolsa transversal terra", image: Prod3, alt: "Bolsa transversal terra" },
-        { id: 4, titulo: "Bolsa transversal terra", image: Prod4, alt: "Bolsa transversal terra" },
-        { id: 5, titulo: "Bolsa transversal terra", image: Prod5, alt: "Bolsa transversal terra" },
-        { id: 6, titulo: "Logo bordado", image: Prod6, alt: "Camiseta com logo costurada" },
-        { id: 7, titulo: "Bolsa transversal azul", image: Prod7, alt: "Bolsa transversal azul" },
-        { id: 8, titulo: "Bolsa transversal azul", image: Prod8, alt: "Bolsa transversal azul" },
-        { id: 9, titulo: "Bolsa transversal azul", image: Prod9, alt: "Bolsa transversal azul" },
-        { id: 10, titulo: "Bolsa transversal azul", image: Prod10, alt: "Bolsa transversal azul" },
-        { id: 11, titulo: "Bolsa transversal azul", image: Prod11, alt: "Bolsa transversal azul" },
-        { id: 12, titulo: "Bolsa transversal azul", image: Prod12, alt: "Bolsa transversal azul" },
-        { id: 13, titulo: "Saia colorida festa junina", image: Prod13, alt: "Saia colorida festa junina" },
-        { id: 14, titulo: "Saia colorida festa junina", image: Prod14, alt: "Saia colorida festa junina" },
-        { id: 15, titulo: "Saia colorida festa junina", image: Prod15, alt: "Saia colorida festa junina" },
-        { id: 16, titulo: "Saia colorida festa junina", image: Prod16, alt: "Saia colorida festa junina" },
-    ];
-
-    // Multiplica a lista 10 vezes para garantir que o carrossel funcione
-    const duplicatedCards = Array(10).fill(cards).flat();
-
-    const getSingleSetWidth = () => {
-        const container = containerRef.current;
-        if (!container) return 0;
-        if (container.children.length >= cards.length + 1) {
-            const firstCard = container.children[0] as HTMLElement;
-            const nextSetCard = container.children[cards.length] as HTMLElement;
-            const diff = nextSetCard.offsetLeft - firstCard.offsetLeft;
-            if (diff > 0) return diff;
-        }
-        return container.scrollWidth / 10;
+    const updateHalf = () => {
+      if (el) half = el.scrollWidth / 2;
     };
+    window.addEventListener("resize", updateHalf);
 
-    // Inicializa o carrossel no meio 
-    useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        const initScroll = () => {
-            const width = getSingleSetWidth();
-            if (width > 0) {
-                const initialScroll = width * 4;
-                container.scrollLeft = initialScroll;
-                scrollPosRef.current = initialScroll;
-            }
-        };
-
-        // Pequeno timeout para garantir que o layout renderizou na tela antes de calcular a largura
-        const timer = setTimeout(initScroll, 50);
-        return () => clearTimeout(timer);
-    }, []);
-
-    // detecta quando o scroll passa dos limites e faz o salto imperceptível
-    const handleScroll = () => {
-        const container = containerRef.current;
-        if (!container || isDraggingRef.current) return; // evita interferir no meio do arrasto físico do usuário
-
-        const width = getSingleSetWidth();
-        if (width === 0) return;
-
-        // Se rolar muito para a direita
-        if (container.scrollLeft >= width * 6) {
-            container.scrollLeft -= width * 2;
+    const step = (now: number) => {
+      const dt = now - last;
+      last = now;
+      if (!isHovered.current && !isDragging) {
+        el.scrollLeft += (dt / 16) * 0.6;
+        if (half > 0 && el.scrollLeft >= half) {
+          el.scrollLeft -= half;
         }
-        // Se rolar muito para a esquerda
-        else if (container.scrollLeft <= width * 3) {
-            container.scrollLeft += width * 2;
-        }
+      }
+      rafId.current = requestAnimationFrame(step);
     };
-
-    // 2. Autoplay: desliza suavemente para a esquerda infinitamente
-    useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        let animationFrameId: number;
-
-        const scroll = () => {
-            // Apenas executa o autoplay se não estiver arrastando, não estiver com o mouse por cima
-            // E se a inércia (momentum) do último arrasto já tiver parado
-            if (!isDraggingRef.current && !isHovered && Math.abs(velocityRef.current) < 0.2) {
-                // Sincroniza a posição caso o usuário tenha rolado manualmente
-                if (Math.abs(scrollPosRef.current - container.scrollLeft) > 1) {
-                    scrollPosRef.current = container.scrollLeft;
-                }
-
-                // Incrementa a posição real com precisão de ponto flutuante
-                scrollPosRef.current += 0.8;
-
-                // Loop infinito também durante o autoplay
-                const width = getSingleSetWidth();
-                if (width > 0 && scrollPosRef.current >= width * 6) {
-                    scrollPosRef.current -= width * 2;
-                }
-                container.scrollLeft = scrollPosRef.current;
-            } else {
-                // Sincroniza a posição enquanto o usuário arrasta ou ocorre a inércia
-                scrollPosRef.current = container.scrollLeft;
-            }
-            animationFrameId = requestAnimationFrame(scroll);
-        };
-
-        animationFrameId = requestAnimationFrame(scroll);
-
-        return () => cancelAnimationFrame(animationFrameId);
-    }, [isHovered]);
-
-    // Função que aplica a desaceleração física (inércia/momentum)
-    const startMomentum = () => {
-        const container = containerRef.current;
-        if (!container) return;
-
-        if (momentumFrameId.current) {
-            cancelAnimationFrame(momentumFrameId.current);
-        }
-
-        const decay = () => {
-            // Fricção física (0.95 significa que perde 5% da velocidade por frame)
-            velocityRef.current *= 0.95;
-
-            // Aplica a rolagem horizontal
-            container.scrollLeft -= velocityRef.current;
-
-            // Mantém o loop infinito rodando perfeitamente durante a desaceleração
-            const width = getSingleSetWidth();
-            if (width > 0) {
-                if (container.scrollLeft >= width * 6) {
-                    container.scrollLeft -= width * 2;
-                } else if (container.scrollLeft <= width * 3) {
-                    container.scrollLeft += width * 2;
-                }
-            }
-
-            // Continua animando enquanto a velocidade for perceptível (maior que 0.2px por frame)
-            if (Math.abs(velocityRef.current) > 0.2) {
-                momentumFrameId.current = requestAnimationFrame(decay);
-            } else {
-                velocityRef.current = 0; // Zera totalmente para liberar o autoplay
-            }
-        };
-
-        momentumFrameId.current = requestAnimationFrame(decay);
+    rafId.current = requestAnimationFrame(step);
+    return () => {
+      window.removeEventListener("resize", updateHalf);
+      if (rafId.current) cancelAnimationFrame(rafId.current);
     };
+  }, [isDragging]);
 
-    // 3. Drag to Scroll (Arrastar com o mouse no Desktop)
-    const handleMouseDown = (e: React.MouseEvent) => {
-        const container = containerRef.current;
-        if (!container) return;
+  const onMouseDown = (e: React.MouseEvent) => {
+    const el = containerRef.current;
+    if (!el) return;
+    setIsDragging(true);
+    startX.current = e.pageX;
+    startScroll.current = el.scrollLeft;
+  };
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging || !containerRef.current) return;
+    e.preventDefault();
+    const delta = e.pageX - startX.current;
+    containerRef.current.scrollLeft = startScroll.current - delta * 1.4;
+  };
+  const stopDrag = () => setIsDragging(false);
 
-        // Cancela qualquer inércia que esteja ativa no momento do clique
-        if (momentumFrameId.current) {
-            cancelAnimationFrame(momentumFrameId.current);
-        }
+  const duplicated = [...CARDS, ...CARDS];
 
-        setIsDragging(true);
-        isDraggingRef.current = true;
-        setStartX(e.pageX - container.offsetLeft);
-        setScrollLeftState(container.scrollLeft);
+  const next = () => setOpenIndex((i) => (i === null ? null : (i + 1) % CARDS.length));
+  const prev = () => setOpenIndex((i) => (i === null ? null : (i - 1 + CARDS.length) % CARDS.length));
 
-        // Inicializa dados para o cálculo da velocidade
-        lastXRef.current = e.pageX;
-        velocityRef.current = 0;
+  useEffect(() => {
+    if (openIndex === null) return;
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpenIndex(null);
+      if (e.key === "ArrowRight") next();
+      if (e.key === "ArrowLeft") prev();
     };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [openIndex]);
 
-    const handleMouseLeave = () => {
-        if (isDraggingRef.current) {
-            setIsDragging(false);
-            isDraggingRef.current = false;
-            startMomentum(); // Começa a inércia ao sair arrastando
-        }
-        setIsHovered(false);
-    };
+  return (
+    <section
+      id="portfolio"
+      className="section-y overflow-hidden"
+      data-testid="portfolio-section"
+    >
+      <div className="container-x flex flex-col lg:flex-row justify-between lg:items-end gap-6 mb-12">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col gap-3"
+        >
+          <span className="eyebrow flex items-center gap-3">
+            <span className="divider-line" />
+            Nossa galeria
+          </span>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.05] text-[color:var(--color-ink)]">
+            Peças{" "}
+            <span className="italic font-light bg-gradient-to-r from-[color:var(--color-terracotta)] to-[color:var(--color-gold)] bg-clip-text text-transparent">
+              Icônicas
+            </span>
+          </h2>
+        </motion.div>
+        <p className="hidden lg:block max-w-sm text-[color:var(--color-ink-soft)] text-sm leading-relaxed">
+          Arraste para navegar em nossas criações recentes. Clique em qualquer peça para ver em detalhes.
+        </p>
+      </div>
 
-    const handleMouseUp = () => {
-        setIsDragging(false);
-        isDraggingRef.current = false;
-        startMomentum(); // Começa a inércia ao soltar o mouse
-    };
-
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!isDraggingRef.current) return;
-        e.preventDefault();
-
-        const container = containerRef.current;
-        if (!container) return;
-
-        const x = e.pageX - container.offsetLeft;
-        const walk = (x - startX) * 1.5;
-        container.scrollLeft = scrollLeftState - walk;
-
-        // Calcula a velocidade baseada na distância percorrida desde o último evento de mouse
-        velocityRef.current = e.pageX - lastXRef.current;
-        lastXRef.current = e.pageX;
-
-        // Ajusta o loop infinito também durante o arrasto se passar dos limites
-        const width = getSingleSetWidth();
-        if (width > 0) {
-            if (container.scrollLeft >= width * 6) {
-                container.scrollLeft -= width * 2;
-                setStartX(e.pageX - container.offsetLeft);
-                setScrollLeftState(container.scrollLeft);
-            } else if (container.scrollLeft <= width * 3) {
-                container.scrollLeft += width * 2;
-                setStartX(e.pageX - container.offsetLeft);
-                setScrollLeftState(container.scrollLeft);
-            }
-        }
-    };
-
-    // Limpa frames de animação ativos ao desmontar o componente
-    useEffect(() => {
-        return () => {
-            if (momentumFrameId.current) cancelAnimationFrame(momentumFrameId.current);
-        };
-    }, []);
-
-    return (
-        <section id="portfolio" className="w-full h-[42rem] xl:section-h flex flex-col items-center justify-start overflow-hidden">
-            <div className="container flex flex-row justify-between items-end w-full py-10">
-                <div className="flex flex-col gap-3 xl:gap-0 items-start">
-                    <span className="font-jont font-bold text-sm text-terra tracking-[0.375rem] uppercase">Nossa galeria</span>
-                    <h2 className="font-serif text-3xl xl:text-5xl text-ebano items-start">
-                        <span>Peças{" "}</span>
-                        <span className="font-serif font-light italic text-3xl xl:text-5xl text-terra">Icônicas</span>
-                    </h2>
-                </div>
-                <span className="desktop-only font-jont text-lg text-grafite">Arraste para navegar em nossas criações recentes</span>
+      <div
+        ref={containerRef}
+        onMouseEnter={() => (isHovered.current = true)}
+        onMouseLeave={() => {
+          isHovered.current = false;
+          stopDrag();
+        }}
+        onMouseDown={onMouseDown}
+        onMouseMove={onMouseMove}
+        onMouseUp={stopDrag}
+        onTouchStart={() => (isHovered.current = true)}
+        onTouchEnd={() => (isHovered.current = false)}
+        className={`flex gap-4 md:gap-5 overflow-x-auto scrollbar-none py-4 px-6 md:px-10 select-none ${
+          isDragging ? "cursor-grabbing" : "cursor-grab"
+        }`}
+        data-testid="portfolio-carousel"
+      >
+        {duplicated.map((card, i) => (
+          <button
+            key={i}
+            onClick={() => !isDragging && setOpenIndex(card.id - 1)}
+            className="group relative shrink-0 w-[62vw] sm:w-[300px] lg:w-[360px] rounded-2xl overflow-hidden bg-[color:var(--color-sand)] shadow-[0_20px_50px_-25px_rgba(44,36,33,0.35)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--color-terracotta)]"
+            data-testid={`portfolio-card-${card.id}`}
+          >
+            <div className="relative w-full h-[420px] lg:h-[480px] overflow-hidden">
+              <img
+                src={card.image}
+                alt={card.alt}
+                loading="lazy"
+                decoding="async"
+                width={360}
+                height={480}
+                draggable={false}
+                onDragStart={(e) => e.preventDefault()}
+                className="w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-[1.08]"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--color-ink)]/85 via-[color:var(--color-ink)]/10 to-transparent opacity-90" />
+              <span className="absolute top-4 left-4 px-3 py-1 rounded-full bg-white/85 backdrop-blur-sm text-[0.62rem] tracking-[0.25em] uppercase text-[color:var(--color-ink)]">
+                {card.categoria}
+              </span>
+              <div className="absolute bottom-0 left-0 right-0 p-5 flex items-end justify-between">
+                <h3 className="font-serif italic text-2xl text-[color:var(--color-cream)] leading-tight max-w-[70%] text-left">
+                  {card.titulo}
+                </h3>
+                <span className="w-10 h-10 rounded-full bg-[color:var(--color-cream)] text-[color:var(--color-terracotta)] grid place-items-center translate-y-1 opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+                  <FaArrowRight size={12} />
+                </span>
+              </div>
             </div>
+          </button>
+        ))}
+      </div>
 
-            {/* Container do Carrossel */}
+      {/* Lightbox */}
+      <AnimatePresence>
+        {openIndex !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[70] flex items-center justify-center p-4"
+            data-testid="portfolio-lightbox"
+          >
             <div
-                ref={containerRef}
-                onScroll={handleScroll}
-                onMouseDown={handleMouseDown}
-                onMouseLeave={handleMouseLeave}
-                onMouseUp={handleMouseUp}
-                onMouseMove={handleMouseMove}
-                onMouseEnter={() => setIsHovered(true)}
-                onTouchStart={() => setIsHovered(true)}
-                onTouchEnd={() => setIsHovered(false)}
-                onTouchCancel={() => setIsHovered(false)}
-                className="w-full flex flex-row gap-3 overflow-x-auto scrollbar-none cursor-grab active:cursor-grabbing select-none py-4 px-10"
+              className="absolute inset-0 bg-[color:var(--color-ink)]/90 backdrop-blur-md"
+              onClick={() => setOpenIndex(null)}
+            />
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              className="relative z-10 w-full max-w-4xl grid grid-cols-1 md:grid-cols-5 gap-0 bg-[color:var(--color-cream)] rounded-2xl overflow-hidden shadow-2xl"
             >
-                {duplicatedCards.map((card, index) => (
-                    <div
-                        key={index}
-                        className="group shrink-0 flex flex-col gap-2 w-[15rem] xl:w-[25rem]"
-                    >
-                        <div className="w-full h-[25rem] xl:h-[30rem] overflow-hidden shadow-md transition-transform duration-300 group-hover:scale-[1.01]">
-                            <img
-                                src={card.image}
-                                alt={card.alt}
-                                draggable="false"
-                                onDragStart={(e) => e.preventDefault()}
-                                className="w-full h-full object-cover grayscale-0 xl:grayscale group-hover:grayscale-0 transition-all duration-500 ease-in-out select-none"
-                            />
-                        </div>
-
-                        <div className="">
-                            <h3 className="font-serif text-xl xl:text-2xl text-ebano">
-                                {card.titulo}
-                            </h3>
-                        </div>
-                    </div>
-                ))}
-            </div>
-        </section>
-    );
+              <div className="md:col-span-3 h-[300px] md:h-[560px]">
+                <img
+                  src={CARDS[openIndex].image}
+                  alt={CARDS[openIndex].alt}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="md:col-span-2 p-6 md:p-8 flex flex-col gap-6">
+                <span className="eyebrow">{CARDS[openIndex].categoria}</span>
+                <h3 className="font-serif text-3xl md:text-4xl leading-tight text-[color:var(--color-ink)]">
+                  {CARDS[openIndex].titulo}
+                </h3>
+                <p className="text-[color:var(--color-ink-soft)] leading-relaxed">
+                  Peça exclusiva do Ateliê Tati Bertolin. Cada detalhe é costurado à mão com tecidos
+                  selecionados e acabamento minucioso. Encomende uma versão personalizada para você.
+                </p>
+                <div className="flex items-center gap-3 mt-auto pt-4">
+                  <button
+                    onClick={prev}
+                    className="w-12 h-12 rounded-full border border-[color:var(--color-border)] hover:border-[color:var(--color-terracotta)] hover:text-[color:var(--color-terracotta)] grid place-items-center transition-colors"
+                    data-testid="lightbox-prev"
+                  >
+                    <FaArrowLeft size={14} />
+                  </button>
+                  <button
+                    onClick={next}
+                    className="w-12 h-12 rounded-full border border-[color:var(--color-border)] hover:border-[color:var(--color-terracotta)] hover:text-[color:var(--color-terracotta)] grid place-items-center transition-colors"
+                    data-testid="lightbox-next"
+                  >
+                    <FaArrowRight size={14} />
+                  </button>
+                  <a
+                    href="#contato"
+                    onClick={() => setOpenIndex(null)}
+                    className="ml-auto text-[0.72rem] tracking-[0.24em] uppercase text-[color:var(--color-terracotta)] link-underline"
+                  >
+                    Encomendar peça
+                  </a>
+                </div>
+              </div>
+              <button
+                onClick={() => setOpenIndex(null)}
+                className="absolute top-3 right-3 w-10 h-10 rounded-full bg-[color:var(--color-ink)] text-[color:var(--color-cream)] grid place-items-center hover:bg-[color:var(--color-terracotta)] transition-colors"
+                data-testid="lightbox-close"
+                aria-label="Fechar"
+              >
+                <FaXmark size={14} />
+              </button>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </section>
+  );
 }

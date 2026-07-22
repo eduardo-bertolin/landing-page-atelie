@@ -1,287 +1,219 @@
 import React, { useRef, useState } from "react";
-import Button from "./Button";
+import { motion } from "framer-motion";
 import { FaWhatsapp } from "react-icons/fa";
+import { FaLocationDot, FaClock, FaPhone } from "react-icons/fa6";
+import { IoMdMail } from "react-icons/io";
 import ReCAPTCHA from "react-google-recaptcha";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Button from "./Button";
 
 export default function Contato() {
-    // states
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+  const [isChallengeCompleted, setChallengeCompleted] = useState(false);
+  const recaptchaRef = useRef<ReCAPTCHA>(null);
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
-    const [email, setEmail] = useState("");
+  const isNullOrEmpty = (val: string) => !val || val.trim() === "";
+  const isValidForm = () => !isNullOrEmpty(email) && !isNullOrEmpty(message);
 
-<<<<<<< HEAD
-    const [message, setMessage] = useState("");
+  const toastStyle = "!bg-[color:var(--color-cream)] !text-[color:var(--color-ink)] !border !border-[color:var(--color-border)] !rounded-2xl !shadow-2xl !font-sans";
 
-    const [isChallengeCompleted, setChallengeCompleted] = useState(false);
-
-    const recaptchaRef = useRef<ReCAPTCHA>(null);
-
-=======
-    const [isChallengeCompleted, setChallengeCompleted] = useState(false);
-
-    const recaptchaRef = useRef<ReCAPTCHA>(null);
-
-    const [message, setMessage] = useState("");
-
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-
-    const [feedbackMsg, setFeedbackMsg] = useState("");
-
-    // validacao
-
-<<<<<<< HEAD
-    // verifica se nulo ou vazio
-
-    function isNullOrEmpty(val: string) {
-        return val === null || val === undefined || val.trim() === '';
+  async function handleSendEmail(): Promise<boolean> {
+    setStatus("loading");
+    try {
+      const response = await fetch("/.netlify/functions/send-email", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, message }),
+      });
+      if (response.ok) {
+        setStatus("success");
+        toast.success("E-mail enviado com sucesso! Retornaremos em breve.", { className: toastStyle });
+        return true;
+      }
+      setStatus("error");
+      toast.error("Falha ao enviar o e-mail. Tente novamente.", { className: toastStyle });
+      return false;
+    } catch (err) {
+      setStatus("error");
+      toast.error("Erro de conexão. Verifique sua rede e tente novamente.", { className: toastStyle });
+      return false;
     }
-=======
-    function isNullOrEmpty(val: string) {
-        return val === null || val === undefined || val.trim() === '';
+  }
+
+  const resetFields = () => {
+    setEmail("");
+    setMessage("");
+  };
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    if (!isValidForm()) return;
+    if (!isChallengeCompleted) {
+      setStatus("error");
+      toast.warning("Por favor, complete o reCAPTCHA antes de enviar.", { className: toastStyle });
+      return;
     }
-
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-    function isValidForm() {
-        return !isNullOrEmpty(email) && !isNullOrEmpty(message);
+    setChallengeCompleted(false);
+    const success = await handleSendEmail();
+    if (success) {
+      resetFields();
+      recaptchaRef.current?.reset();
     }
+  }
 
-    // requisicao http
+  function handleCompleteChallenge(token: string | null) {
+    setChallengeCompleted(!!token);
+  }
 
-    // envia os dados do formulário 
-    async function handleSendEmail(): Promise<boolean> {
-        setStatus("loading");
-        try {
-            const response = await fetch("/.netlify/functions/send-email", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, message }),
-            });
+  return (
+    <section
+      id="contato"
+      className="relative section-y bg-[color:var(--color-ink)] text-[color:var(--color-cream)] overflow-hidden grain"
+      data-testid="contato-section"
+    >
+      {/* decorative bg */}
+      <div className="absolute inset-0 -z-[1]">
+        <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full bg-[color:var(--color-terracotta)]/20 blur-[120px]" />
+        <div className="absolute -bottom-40 -left-32 w-[500px] h-[500px] rounded-full bg-[color:var(--color-gold)]/10 blur-[120px]" />
+      </div>
 
-            if (response.ok) {
-                setStatus("success");
-                toast.success("E-mail enviado com sucesso!", {
-                    className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
-                });
-                return true;
-<<<<<<< HEAD
-            } else
-=======
-            } else {
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-                setStatus("error");
-            toast.error("Falha ao enviar o e-mail. Tente novamente.", {
-                className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
-            });
-            return false;
+      <div className="container-x grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+        {/* Left: info */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.8 }}
+          className="lg:col-span-5 flex flex-col gap-8"
+        >
+          <span className="eyebrow !text-[color:var(--color-gold)] flex items-center gap-3">
+            <span className="divider-line" />
+            Fale conosco
+          </span>
+          <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl leading-[1.05]">
+            Vamos criar algo{" "}
+            <span className="italic font-light text-[color:var(--color-gold)]">único juntas?</span>
+          </h2>
+          <p className="text-[color:var(--color-cream)]/70 leading-relaxed text-lg max-w-md">
+            Tem alguma dúvida ou gostaria de fazer um pedido personalizado? Preencha o formulário
+            ao lado e retornaremos o mais breve possível.
+          </p>
 
-        } catch (error) {
-            setStatus("error");
-            toast.error("Erro de conexão. Verifique sua rede e tente novamente.", {
-                className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
-            });
-            return false;
-        }
-    }
+          <div className="space-y-4 pt-4">
+            {[
+              { icon: <FaPhone />, label: "(45) 98815-7023", testId: "contact-phone" },
+              { icon: <IoMdMail />, label: "atelietatibertolin@hotmail.com", testId: "contact-email" },
+              { icon: <FaLocationDot />, label: "Cascavel — PR", testId: "contact-location" },
+              { icon: <FaClock />, label: "Segunda a sexta · 08h às 18h", testId: "contact-hours" },
+            ].map((it) => (
+              <div key={it.testId} className="flex items-center gap-4" data-testid={it.testId}>
+                <span className="w-11 h-11 grid place-items-center rounded-full bg-[color:var(--color-gold)]/10 border border-[color:var(--color-gold)]/30 text-[color:var(--color-gold)]">
+                  {it.icon}
+                </span>
+                <span className="text-[color:var(--color-cream)]/85">{it.label}</span>
+              </div>
+            ))}
+          </div>
 
-    function resetFields() {
-        setEmail("");
-        setMessage("");
-    }
+          <a
+            href="http://wa.me/45988157023"
+            target="_blank"
+            rel="noopener noreferrer"
+            data-testid="contact-whatsapp-btn"
+            className="btn-shine inline-flex items-center justify-center gap-3 mt-2 px-6 py-4 rounded-full bg-[#25D366] text-white font-medium tracking-widest text-[0.72rem] uppercase hover:-translate-y-0.5 transition-transform shadow-[0_10px_25px_-10px_rgba(37,211,102,0.6)] w-fit"
+          >
+            <FaWhatsapp size={22} />
+            <span className="relative z-[2]">Falar no WhatsApp</span>
+          </a>
+        </motion.div>
 
-<<<<<<< HEAD
-    //funcao de submit
-
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        //nao recarrega a pagina
-=======
-    // forms
-
-    async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-        // impede recarregar a página
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-        e.preventDefault();
-
-        if (!isValidForm()) {
-            return;
-        }
-
-        if (!isChallengeCompleted) {
-            setStatus("error");
-            toast.warning("Por favor, complete o reCAPTCHA antes de enviar.", {
-                className: "!bg-cru !text-ebano !border !border-terra !rounded-none !shadow-2xl",
-            });
-            return;
-        }
-
-<<<<<<< HEAD
-        setFeedbackMsg("");
-        setChallengeCompleted(false);
-
-        //espera resposta
-=======
-        // limpa
-        setFeedbackMsg("");
-        setChallengeCompleted(false);
-
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-        const success = await handleSendEmail();
-
-        if (success) {
-            resetFields();
-            recaptchaRef.current?.reset();
-        }
-    }
-
-    // ---- RECAPTCHA ----
-
-    function handleCompleteChallenge(token: string | null) {
-<<<<<<< HEAD
-
-=======
-        // se não houver token
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-        if (!token) {
-            setChallengeCompleted(false);
-            return;
-        }
-
-<<<<<<< HEAD
-=======
-        // se houver token
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-        setChallengeCompleted(true);
-    }
-
-
-    return (
-        <section id="contato" className="relative w-full section-h flex flex-col items-center justify-center bg-ebano">
-            <div className="container flex flex-col items-center gap-10 w-full px-5 py-10 xl:py-0">
-                <div className="flex flex-col items-center text-center gap-4">
-                    <span className="font-jont font-bold text-sm text-terra tracking-[0.375rem] uppercase">Fale Conosco</span>
-                    <h2 className="font-serif text-3xl xl:text-5xl text-cru">
-                        <span>Entre em </span>
-                        <span className="font-light italic text-terra">Contato</span>
-                    </h2>
-                    <p className="text-cru max-w-lg mt-2">
-                        Tem alguma dúvida ou gostaria de fazer um pedido personalizado? Preencha o formulário abaixo e retornaremos o mais breve possível.
-                    </p>
-                </div>
-
-<<<<<<< HEAD
-                {/* formulário*/}
-=======
-                {/* forms */}
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-                <form
-                    onSubmit={handleSubmit}
-                    className="w-full max-w-2xl bg-white p-8 xl:p-8 shadow-lg flex flex-col gap-3"
-                >
-<<<<<<< HEAD
-=======
-                    {/* e-mail */}
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="email" className="font-serif text-ebano text-lg">Seu E-mail</label>
-                        <input
-                            type="email"
-                            id="email"
-                            required
-                            placeholder="exemplo@email.com"
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                            disabled={status === "loading"}
-                            className="w-full p-4 border border-gray-300 focus:outline-none focus:border-terra transition-colors"
-                        />
-                    </div>
-
-<<<<<<< HEAD
-=======
-                    {/* mensagem */}
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-                    <div className="flex flex-col gap-2">
-                        <label htmlFor="message" className="font-serif text-ebano text-lg">Sua Mensagem</label>
-                        <textarea
-                            id="message"
-                            required
-                            rows={5}
-                            placeholder="Escreva como podemos te ajudar..."
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            disabled={status === "loading"}
-                            className="w-full p-4 border border-gray-300 focus:outline-none focus:border-terra transition-colors resize-none"
-                        ></textarea>
-                    </div>
-
-<<<<<<< HEAD
-
-=======
-                    {/* google reCAPTCHA */}
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-                    <div className="flex justify-center my-2">
-                        <ReCAPTCHA
-                            ref={recaptchaRef}
-                            sitekey="6LfXuBstAAAAACgxzmEIgH55TDjFY-ypxhazKz-E" // chave pública de integração do site
-                            onChange={handleCompleteChallenge}
-                        />
-                    </div>
-
-<<<<<<< HEAD
-=======
-
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-                    <Button
-                        type="submit"
-                        variant="submit"
-                        disabled={status === "loading"}
-                        text={status === "loading" ? "Enviando..." : "Enviar Mensagem"}
-                        className="mt-2"
-                    />
-
-                    {/* mensagem de feedback */}
-                    {feedbackMsg && (
-                        <div className={`p-4 text-center ${status === "success" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
-                            {feedbackMsg}
-                        </div>
-                    )}
-                </form>
-
-                {/* botao whatsapp mobile */}
-                <div className="w-full max-w-2xl md:hidden mt-2">
-                    <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer" className="w-full flex items-center justify-center gap-3 bg-terra font-jont font-semibold uppercase tracking-wider py-4 hover:brightness-110 transition-all shadow-lg ">
-                        <FaWhatsapp size={28} className="text-green-500" />
-                        <span className="text-white ">Falar no WhatsApp</span>
-                    </a>
-                </div>
-
+        {/* Right: form */}
+        <motion.form
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.9, delay: 0.15 }}
+          onSubmit={handleSubmit}
+          className="lg:col-span-7 relative p-8 md:p-10 rounded-3xl bg-white/[0.04] backdrop-blur-md border border-white/10 shadow-[0_40px_100px_-40px_rgba(0,0,0,0.6)]"
+          data-testid="contact-form"
+        >
+          <div className="grid grid-cols-1 gap-8">
+            <div className="field">
+              <input
+                type="email"
+                id="email"
+                required
+                placeholder=" "
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                disabled={status === "loading"}
+                data-testid="contact-email-input"
+              />
+              <label htmlFor="email">Seu e-mail</label>
             </div>
 
-<<<<<<< HEAD
-            {/* icone fixo whatsapp dekstop */}
-=======
-            {/* botao whats pra tela menor */}
->>>>>>> 508e988709b2ef96a933e6db6413ed82b71a0ced
-            <div className="hidden md:block fixed md:bottom-10 md:right-4 z-50 hover:scale-110 transition-transform cursor-pointer hover:brightness-110">
-                <a href="http://wa.me/45988157023" target="_blank" rel="noopener noreferrer">
-                    <FaWhatsapp className="w-20 h-20 text-dourado" />
-                </a>
+            <div className="field">
+              <textarea
+                id="message"
+                required
+                rows={5}
+                placeholder=" "
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                disabled={status === "loading"}
+                data-testid="contact-message-input"
+              />
+              <label htmlFor="message">Sua mensagem</label>
             </div>
 
-            {/* toastify */}
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover={false}
-                theme="light"
-                transition={Bounce}
+            <div className="flex justify-start">
+              <ReCAPTCHA
+                ref={recaptchaRef}
+                sitekey="6LfXuBstAAAAACgxzmEIgH55TDjFY-ypxhazKz-E"
+                onChange={handleCompleteChallenge}
+                theme="dark"
+              />
+            </div>
+
+            <Button
+              type="submit"
+              variant="submit"
+              disabled={status === "loading"}
+              text={status === "loading" ? "Enviando..." : "Enviar mensagem"}
+              testId="contact-submit-btn"
             />
-        </section>
-    );
+          </div>
+        </motion.form>
+      </div>
+
+      {/* Floating WhatsApp desktop */}
+      <a
+        href="http://wa.me/45988157023"
+        target="_blank"
+        rel="noopener noreferrer"
+        data-testid="floating-whatsapp-btn"
+        className="hidden md:grid place-items-center fixed bottom-8 right-8 z-40 w-16 h-16 rounded-full bg-[#25D366] text-white shadow-[0_20px_40px_-15px_rgba(37,211,102,0.7)] hover:scale-110 transition-transform"
+        aria-label="Falar no WhatsApp"
+      >
+        <FaWhatsapp size={28} />
+      </a>
+
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="light"
+        transition={Bounce}
+      />
+    </section>
+  );
 }

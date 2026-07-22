@@ -1,60 +1,108 @@
+import { motion } from "framer-motion";
+import { FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa6";
 import Logo from "./Logo";
-import { FaPhone, FaLocationDot, FaClock, FaInstagram, FaFacebook, FaYoutube } from "react-icons/fa6";
-import { IoMdMail } from "react-icons/io";
 
+const SOCIALS = [
+  { icon: FaInstagram, label: "@atelietatibertolin", href: "https://www.instagram.com/atelietatibertolin/", hover: "hover:text-[#E1306C] hover:border-[#E1306C]" },
+  { icon: FaFacebook, label: "/atelietatibertolin", href: "https://www.facebook.com/atelietatibertolin/", hover: "hover:text-[#1877F2] hover:border-[#1877F2]" },
+  { icon: FaYoutube, label: "/atelietatibertolin", href: "https://www.youtube.com/channel/UCZYuZOcvh9gY5lCuft8Thng", hover: "hover:text-[#FF0000] hover:border-[#FF0000]" },
+];
 
+const LINKS = [
+  { label: "Sobre", href: "#sobre" },
+  { label: "Serviços", href: "#servicos" },
+  { label: "Portfólio", href: "#portfolio" },
+  { label: "Depoimentos", href: "#avaliacoes" },
+  { label: "Contato", href: "#contato" },
+];
 
 export default function Footer() {
-    return (
-        <section id="footer" className="w-full h-auto ">
-            <div className="grid grid-cols-2 lg:grid-cols-3 w-full mx-auto my-10">
-                <div className="flex flex-col w-full h-auto justify-start px-5 gap-4 col-span-2 lg:col-span-1 pb-8 lg:pb-0">
-                    <Logo />
-                    <p className="text-grafite font-jost text-lg max-w-md">
-                        Peças feitas à mão com todo cuidado e carinho. Transformando tecidos em itens únicos que carregam história em cada detalhe.
-                    </p>
-                </div>
+  return (
+    <footer className="relative bg-[color:var(--color-cream)] border-t border-[color:var(--color-border)] pt-16 pb-8" data-testid="site-footer">
+      <div className="container-x grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+        {/* brand col */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="lg:col-span-2 flex flex-col gap-4 max-w-md"
+        >
+          <Logo />
+          <p className="text-[color:var(--color-ink-soft)] text-[0.95rem] leading-relaxed">
+            Peças feitas à mão com todo cuidado e carinho. Transformando tecidos em itens únicos que
+            carregam história em cada detalhe.
+          </p>
+          <div className="flex gap-3 mt-2">
+            {SOCIALS.map((s) => (
+              <a
+                key={s.href}
+                href={s.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={s.label}
+                data-testid={`footer-social-${s.label.slice(1, 5)}`}
+                className={`w-11 h-11 grid place-items-center rounded-full border border-[color:var(--color-border)] text-[color:var(--color-ink-soft)] transition-all duration-300 hover:-translate-y-1 ${s.hover}`}
+              >
+                <s.icon size={18} />
+              </a>
+            ))}
+          </div>
+        </motion.div>
 
-                <div className="flex flex-col w-full h-auto justify-start px-5 gap-4 lg:mx-auto lg:w-fit">
-                    <p className="text-md text-grafite uppercase font-semibold">Redes Sociais</p>
-                    <a href="https://www.instagram.com/atelietatibertolin/" className="group flex flex-row items-center gap-2 cursor-pointer w-fit">
-                        <FaInstagram className="w-4 h-4 text-grafite transition-colors group-hover:text-orange-500" />
-                        <span className="font-jost text-lg text-grafite transition-colors group-hover:text-orange-500 underline xl:no-underline">@atelietatibertolin</span>
-                    </a>
-                    <a href="https://www.facebook.com/atelietatibertolin/" className="group flex flex-row items-center gap-2 cursor-pointer w-fit">
-                        <FaFacebook className="w-4 h-4 text-grafite transition-colors group-hover:text-blue-500" />
-                        <span className="font-jost text-lg text-grafite transition-colors group-hover:text-blue-500 underline xl:no-underline">/atelietatibertolin</span>
-                    </a>
-                    <a href="https://www.youtube.com/channel/UCZYuZOcvh9gY5lCuft8Thng" className="group flex flex-row items-center gap-2 cursor-pointer w-fit">
-                        <FaYoutube className="w-4 h-4 text-grafite transition-colors group-hover:text-red-500" />
-                        <span className="font-jost text-lg text-grafite transition-colors group-hover:text-red-500 underline xl:no-underline">/atelietatibertolin</span>
-                    </a>
-                </div>
+        {/* nav col */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+          className="flex flex-col gap-4"
+        >
+          <p className="text-[0.7rem] tracking-[0.3em] uppercase text-[color:var(--color-terracotta)] font-medium">
+            Navegação
+          </p>
+          <ul className="flex flex-col gap-3">
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <a
+                  href={l.href}
+                  className="link-underline text-[color:var(--color-ink)] hover:text-[color:var(--color-terracotta)] transition-colors"
+                >
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </motion.div>
 
-                <div className="flex flex-col w-full h-auto justify-start px-5 gap-4 lg:mx-auto lg:w-fit">
-                    <p className="text-md text-grafite uppercase font-semibold">Atendimento</p>
-                    <div className="flex flex-row items-center gap-2">
-                        <FaPhone className="text-grafite w-4 h-4 " />
-                        <span className="text-grafite font-jost text-lg">(45) 98815-7023</span>
-                    </div>
-                    <div className="flex flex-row items-center gap-2">
-                        <IoMdMail className="text-grafite w-4 h-4 " />
-                        <span className="text-grafite font-jost text-lg">atelietatibertolin@hotmail.com</span>
-                    </div>
-                    <div className="flex flex-row items-center gap-2">
-                        <FaLocationDot className="text-grafite w-4 h-4 " />
-                        <span className="text-grafite font-jost text-lg">Cascavel - PR</span>
-                    </div>
-                    <div className="flex flex-row items-center gap-2">
-                        <FaClock className="text-grafite w-5 h-5 xl:w-4 xl:h-4 " />
-                        <span className="text-grafite font-jost text-lg">Segunda a Sexta - 08:00 às 18:00</span>
-                    </div>
-                </div>
+        {/* contact col */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="flex flex-col gap-4"
+        >
+          <p className="text-[0.7rem] tracking-[0.3em] uppercase text-[color:var(--color-terracotta)] font-medium">
+            Atendimento
+          </p>
+          <div className="flex flex-col gap-3 text-[color:var(--color-ink-soft)] text-[0.95rem]">
+            <span>(45) 98815-7023</span>
+            <span>atelietatibertolin@hotmail.com</span>
+            <span>Cascavel — PR</span>
+            <span>Seg — Sex · 08h às 18h</span>
+          </div>
+        </motion.div>
+      </div>
 
-            </div>
-            <div className="border-t-2 border-black/10 p-6 justify-center">
-                <p className="font-jost text-md text-grafite/50 text-center w-full font-medium uppercase">© {new Date().getFullYear()} Ateliê Tati Bertolin. Todos os direitos reservados.</p>
-            </div>
-        </section>
-    )
+      <div className="container-x mt-14 pt-6 border-t border-[color:var(--color-border)] flex flex-col md:flex-row gap-3 items-center justify-between">
+        <p className="font-sans text-xs text-[color:var(--color-muted)] tracking-[0.24em] uppercase">
+          © {new Date().getFullYear()} Ateliê Tati Bertolin — Todos os direitos reservados.
+        </p>
+        <p className="font-serif italic text-[color:var(--color-muted)] text-sm">
+          Feito à mão com <span className="text-[color:var(--color-terracotta)]">♥</span> em Cascavel/PR
+        </p>
+      </div>
+    </footer>
+  );
 }
