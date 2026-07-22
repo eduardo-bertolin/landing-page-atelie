@@ -111,8 +111,3 @@ ALLOWED_ORIGIN=https://seu-dominio.netlify.app
 ```
 
 ---
-
-## 👤 Autor
-
-Desenvolvido por **Eduardo Bertolin**.
-- **GitHub**: [@eduardo-bertolin](https://github.com/eduardo-bertolin)
