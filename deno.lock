@@ -23,6 +23,7 @@
         "npm:eslint-plugin-react-hooks@^7.0.1",
         "npm:eslint-plugin-react-refresh@~0.5.2",
         "npm:eslint@^9.39.4",
+        "npm:framer-motion@^12.42.2",
         "npm:globals@^17.4.0",
         "npm:netlify-cli@^26.1.0",
         "npm:nodemailer@^8.0.10",

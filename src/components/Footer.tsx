@@ -95,12 +95,9 @@ export default function Footer() {
         </motion.div>
       </div>
 
-      <div className="container-x mt-14 pt-6 border-t border-[color:var(--color-border)] flex flex-col md:flex-row gap-3 items-center justify-between">
+      <div className="container-x mt-14 pt-6 border-t border-[color:var(--color-border)] flex flex-col md:flex-row gap-3 items-center justify-center">
         <p className="font-sans text-xs text-[color:var(--color-muted)] tracking-[0.24em] uppercase">
           © {new Date().getFullYear()} Ateliê Tati Bertolin — Todos os direitos reservados.
-        </p>
-        <p className="font-serif italic text-[color:var(--color-muted)] text-sm">
-          Feito à mão com <span className="text-[color:var(--color-terracotta)]">♥</span> em Cascavel/PR
         </p>
       </div>
     </footer>
