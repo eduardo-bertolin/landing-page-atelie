@@ -1,4 +1,4 @@
-# 🪡 Ateliê Tati Bertolin — Landing Page Moderna & High-Performance
+# Ateliê Tati Bertolin — Landing Page Moderna & High-Performance
 
 Landing Page institucional e catálogo de produtos artesanais para o **Ateliê Tati Bertolin** (costura criativa e patchwork autoral). Desenvolvida com foco em **estética refinada**, **animações fluídas (Framer Motion)**, **integração backend serverless para envio de e-mails** e **otimização extrema de performance (WebP, Lazy Loading, Code Splitting)**.
 
